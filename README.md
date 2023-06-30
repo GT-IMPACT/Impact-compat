@@ -1,1 +1,4 @@
-# Template Mod for ModPack
+# Impact Compat
+
+### Integrations
+- GregTech

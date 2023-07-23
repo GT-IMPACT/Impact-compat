@@ -7,7 +7,6 @@ fun registerTEModels() {
     registerTEModel(WindWhealTE::class.java, "wind_wheal")
 }
 
-class WaterWhealTE(override val animateName: String = "water_wheal.geo") : BaseTileEntityModel()
+class WaterWhealTE : BaseTileRotationEntityModel()
 
-class WindWhealTE(override val animateName: String = "wind_wheal.geo") : BaseTileEntityModel()
-
+class WindWhealTE : BaseTileRotationEntityModel()

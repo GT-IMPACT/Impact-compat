@@ -1,7 +1,8 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"wind_wheal.geo": {
+		"work.left": {
+			"loop": true,
 			"animation_length": 2,
 			"bones": {
 				"bone2": {
@@ -13,6 +14,48 @@
 						"2.0": {
 							"vector": [0, 0, 0]
 						}
+					}
+				}
+			}
+		},
+		"stop.left": {
+			"animation_length": 3,
+			"bones": {
+				"bone2": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 270]
+						},
+						"3.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutSine"
+						}
+					}
+				}
+			}
+		},
+		"start.left": {
+			"animation_length": 3,
+			"bones": {
+				"bone2": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, 0, 270],
+							"easing": "easeInSine"
+						}
+					}
+				}
+			}
+		},
+		"idle.left": {
+			"loop": "hold_on_last_frame",
+			"bones": {
+				"bone2": {
+					"rotation": {
+						"vector": [0, 0, 270]
 					}
 				}
 			}

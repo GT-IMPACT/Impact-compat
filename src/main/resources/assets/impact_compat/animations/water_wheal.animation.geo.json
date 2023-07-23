@@ -1,18 +1,124 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"water_wheal.geo": {
-			"loop": true,
-			"animation_length": 2,
+		"start.left": {
+			"animation_length": 5,
 			"bones": {
 				"X": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"2.0": {
+						"5.0": {
+							"vector": [0, 0, -360],
+							"easing": "easeInSine"
+						}
+					}
+				}
+			}
+		},
+		"start.right": {
+			"animation_length": 5,
+			"bones": {
+				"X": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"5.0": {
+							"vector": [0, 0, 360],
+							"easing": "easeInSine"
+						}
+					}
+				}
+			}
+		},
+		"work.left": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"X": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"4.0": {
 							"vector": [0, 0, -360]
 						}
+					}
+				}
+			}
+		},
+		"work.right": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"X": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"4.0": {
+							"vector": [0, 0, 360]
+						}
+					}
+				}
+			}
+		},
+		"stop.left": {
+			"animation_length": 5,
+			"bones": {
+				"X": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 0, -90]
+						},
+						"5.0": {
+							"vector": [0, 0, -360],
+							"easing": "easeOutSine"
+						}
+					}
+				}
+			}
+		},
+		"stop.right": {
+			"animation_length": 5,
+			"bones": {
+				"X": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 0, 90]
+						},
+						"5.0": {
+							"vector": [0, 0, 360],
+							"easing": "easeOutSine"
+						}
+					}
+				}
+			}
+		},
+		"idle.left": {
+			"loop": "hold_on_last_frame",
+			"bones": {
+				"X": {
+					"rotation": {
+						"vector": [0, 0, -360]
+					}
+				}
+			}
+		},
+		"idle.right": {
+			"loop": "hold_on_last_frame",
+			"bones": {
+				"X": {
+					"rotation": {
+						"vector": [0, 0, 360]
 					}
 				}
 			}

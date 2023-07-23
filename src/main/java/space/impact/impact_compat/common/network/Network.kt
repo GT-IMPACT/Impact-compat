@@ -1,23 +1,24 @@
 package space.impact.impact_compat.common.network
 
-import space.impact.impact_compat.common.tiles.WaterWhealTE
-import space.impact.impact_compat.common.tiles.WindWhealTE
+import space.impact.impact_compat.common.tiles.BaseTileEntityModel
+import space.impact.impact_compat.common.tiles.BaseTileRotationEntityModel
 import space.impact.packet_network.network.packets.createPacketStream
 import space.impact.packet_network.network.registerPacket
 
 object Network {
 
-    val PacketUpdateWhealMill = createPacketStream(3000) {isServer, data ->
+    val PacketUpdateModelAnimate = createPacketStream(3000) { isServer, data ->
         if (!isServer) {
             val isActive = data.readBoolean()
-            when(val te = tileEntity) {
-                is WaterWhealTE -> te.isAnimated = isActive
-                is WindWhealTE -> te.isAnimated = isActive
+            (tileEntity as? BaseTileEntityModel)?.apply {
+                isAnimated = isActive
+                isFirst = false
+                if (isActive) isWork = true
             }
         }
     }
 
     fun registerPackets() {
-        registerPacket(PacketUpdateWhealMill)
+        registerPacket(PacketUpdateModelAnimate)
     }
 }

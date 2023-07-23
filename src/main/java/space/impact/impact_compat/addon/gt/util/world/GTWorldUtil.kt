@@ -2,9 +2,11 @@ package space.impact.impact_compat.addon.gt.util.world
 
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
+import net.minecraft.block.Block
 import net.minecraft.tileentity.TileEntity
 import space.impact.impact_compat.common.util.world.Vec3
 
+@Suppress("unused")
 object GTWorldUtil {
 
     fun vectorOffset(te: IGregTechTileEntity, x: Int, y: Int, z: Int): Vec3 {
@@ -28,11 +30,31 @@ object GTWorldUtil {
         return offset
     }
 
-    inline fun <reified T : TileEntity> getTile(gte: IGregTechTileEntity?, x: Int, y: Int, z: Int): T? {
-        return gte?.getTileEntity(x + gte.xCoord, y + gte.yCoord, z + gte.zCoord) as? T
+    fun vectorOffsetOutside(te: IGregTechTileEntity, x: Int, y: Int, z: Int): Vec3 {
+        return vectorOffset(te, x + te.xCoord, y + te.yCoord, z + te.zCoord)
+    }
+
+    fun getBlockOffset(gte: IGregTechTileEntity, pos: Vec3): Block {
+        return gte.getBlockOffset(pos.x, pos.y, pos.z)
+    }
+
+    fun setBlockOffset(gte: IGregTechTileEntity, pos: Vec3, block: Block, meta: Int) {
+        gte.world.setBlock(pos.x + gte.xCoord, pos.y + gte.yCoord, pos.z + gte.zCoord, block, meta, 3)
+    }
+
+    inline fun <reified T : TileEntity> getTileOffset(gte: IGregTechTileEntity?, x: Int, y: Int, z: Int): T? {
+        return gte?.getTileEntityOffset(x, y, z) as? T
+    }
+
+    inline fun <reified T : TileEntity> getTileOffset(gte: IGregTechTileEntity?, pos: Vec3): T? {
+        return gte?.getTileEntityOffset(pos.x, pos.y, pos.z) as? T
     }
 
     inline fun <reified T : IMetaTileEntity> getMTile(gte: IGregTechTileEntity?, x: Int, y: Int, z: Int): T? {
         return gte?.getIGregTechTileEntity(x + gte.xCoord, y + gte.yCoord, z + gte.zCoord)?.metaTileEntity as? T
+    }
+
+    inline fun <reified T : IMetaTileEntity> getMTile(gte: IGregTechTileEntity?, pos: Vec3): T? {
+        return gte?.getIGregTechTileEntityOffset(pos.x, pos.y, pos.z)?.metaTileEntity as? T
     }
 }

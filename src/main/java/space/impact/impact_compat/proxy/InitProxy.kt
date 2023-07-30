@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import software.bernie.geckolib3.GeckoLib
 import space.impact.impact_compat.addon.gt.GTAddon
+import space.impact.impact_compat.addon.waila.Waila
 import space.impact.impact_compat.client.register.initModels
 import space.impact.impact_compat.common.tiles.registerTEModels
 import space.impact.impact_compat.core.InitSide
@@ -58,6 +59,7 @@ class InitCommon : InitSide {
     override fun init(e: FMLInitializationEvent) {
         registerTEModels()
         GTAddon.init()
+        Waila.init()
     }
 
     override fun postInit(e: FMLPostInitializationEvent) {

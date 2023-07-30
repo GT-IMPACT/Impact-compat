@@ -3,17 +3,23 @@ package space.impact.impact_compat.common.blocks
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import gregtech.api.GregTech_API
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity
+import gregtech.api.metatileentity.BaseTileEntity
+import gregtech.api.util.GT_Utility
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
-import net.minecraft.util.MathHelper
 import net.minecraft.world.World
+import net.minecraftforge.common.util.ForgeDirection
 import software.bernie.geckolib3.item.GeoItemBlock
 import space.impact.impact_compat.MODID
+import space.impact.impact_compat.common.tiles.BaseCompatTileEntity
 
 abstract class ModelBlockBase(
     private val blockName: String,
@@ -51,17 +57,41 @@ abstract class ModelBlockBase(
         return -1
     }
 
-    override fun onBlockPlacedBy(world: World, x: Int, y: Int, z: Int, placer: EntityLivingBase, stack: ItemStack) {
-        when (MathHelper.floor_double(placer.rotationYaw.toDouble() * 4.0 / 360.0 + 0.5) and 3) {
-            0 -> world.setBlockMetadataWithNotify(x, y, z, 2, 2)
-            1 -> world.setBlockMetadataWithNotify(x, y, z, 5, 2)
-            2 -> world.setBlockMetadataWithNotify(x, y, z, 3, 2)
-            3 -> world.setBlockMetadataWithNotify(x, y, z, 4, 2)
-        }
+    override fun onBlockPlacedBy(aWorld: World, aX: Int, aY: Int, aZ: Int, aPlayer: EntityLivingBase?, aStack: ItemStack?) {
+        val tTileEntity = aWorld.getTileEntity(aX, aY, aZ)
+        if (tTileEntity !is BaseCompatTileEntity) return
+        tTileEntity.setFrontFacing(BaseTileEntity.getSideForPlayerPlacing(aPlayer, ForgeDirection.UP, tTileEntity.getValidFacings()))
     }
 
     @SideOnly(Side.CLIENT)
     override fun getSelectedBoundingBoxFromPool(world: World, x: Int, y: Int, z: Int): AxisAlignedBB {
         return AxisAlignedBB.getBoundingBox(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    }
+
+    override fun onBlockClicked(aWorld: World, aX: Int, aY: Int, aZ: Int, aPlayer: EntityPlayer?) {
+        val tTileEntity = aWorld.getTileEntity(aX, aY, aZ)
+        if (tTileEntity is IGregTechTileEntity) {
+            tTileEntity.onLeftclick(aPlayer)
+        }
+    }
+
+    override fun onBlockActivated(
+        aWorld: World, aX: Int, aY: Int, aZ: Int, aPlayer: EntityPlayer, ordinalSide: Int,
+        aOffsetX: Float, aOffsetY: Float, aOffsetZ: Float
+    ): Boolean {
+        val tTileEntity = aWorld.getTileEntity(aX, aY, aZ) ?: return false
+        if (aPlayer.isSneaking) {
+            val tCurrentItem = aPlayer.inventory.getCurrentItem()
+            if (tCurrentItem != null && !GT_Utility.isStackInList(tCurrentItem, GregTech_API.sScrewdriverList)
+                && !GT_Utility.isStackInList(tCurrentItem, GregTech_API.sWrenchList)
+                && !GT_Utility.isStackInList(tCurrentItem, GregTech_API.sWireCutterList)
+                && !GT_Utility.isStackInList(tCurrentItem, GregTech_API.sSolderingToolList)
+            ) return false
+        }
+        if (tTileEntity is IGregTechTileEntity) {
+            return if (!aWorld.isRemote && !tTileEntity.isUseableByPlayer(aPlayer)) true
+            else tTileEntity.onRightclick(aPlayer, ForgeDirection.getOrientation(ordinalSide), aOffsetX, aOffsetY, aOffsetZ)
+        }
+        return false
     }
 }

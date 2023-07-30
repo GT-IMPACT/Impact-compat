@@ -3,7 +3,6 @@ package space.impact.impact_compat.common.tiles
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.EnumFacing
 import software.bernie.geckolib3.core.IAnimatable
 import software.bernie.geckolib3.core.PlayState
 import software.bernie.geckolib3.core.builder.AnimationBuilder
@@ -14,7 +13,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory
 import software.bernie.geckolib3.util.GeckoLibUtil
 import space.impact.impact_compat.core.NBT
 
-abstract class BaseTileEntityModel : TileEntity(), IAnimatable {
+abstract class BaseTileEntityModel : BaseCompatTileEntity(), IAnimatable {
 
     companion object {
         fun registerTEModel(clazz: Class<out TileEntity>, tileId: String) {

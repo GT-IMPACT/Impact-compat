@@ -13,7 +13,7 @@ import net.minecraft.world.biome.BiomeGenBase
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.util.world.GTWorldUtil
 import space.impact.impact_compat.common.network.Network
-import space.impact.impact_compat.common.tiles.BaseTileEntityModel
+import space.impact.impact_compat.common.tiles.BaseTileRotationEntityModel
 import space.impact.impact_compat.common.tiles.WaterWhealTE
 import space.impact.impact_compat.common.tiles.WindWhealTE
 import space.impact.impact_compat.core.NBT
@@ -33,7 +33,7 @@ class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
     var active: Boolean = false
         private set
     private var lastActive: Boolean = false
-    private var wheal: BaseTileEntityModel? = null
+    private var wheal: BaseTileRotationEntityModel? = null
     private var blocksCountToStart: Int = 0
 
     constructor(aID: Int, aName: String)
@@ -63,13 +63,13 @@ class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
     override fun saveNBTData(data: NBTTagCompound) {
         super.saveNBTData(data)
         data.setBoolean(NBT.NBT_ACTIVE, active)
-        data.setInteger(NBT.NTB_BLOCKS_COUNT, blocksCountToStart)
+        data.setInteger(NBT.NBT_BLOCKS_COUNT, blocksCountToStart)
     }
 
     override fun loadNBTData(data: NBTTagCompound) {
         super.loadNBTData(data)
         active = data.getBoolean(NBT.NBT_ACTIVE)
-        blocksCountToStart = data.getInteger(NBT.NTB_BLOCKS_COUNT)
+        blocksCountToStart = data.getInteger(NBT.NBT_BLOCKS_COUNT)
     }
 
     override fun onRemoval() {
@@ -115,7 +115,7 @@ class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
         }
     }
 
-    private fun checkAround(te: IGregTechTileEntity, wheal: BaseTileEntityModel) {
+    private fun checkAround(te: IGregTechTileEntity, wheal: BaseTileRotationEntityModel) {
         when (wheal) {
             is WaterWhealTE -> {
                 var isActive = true
@@ -143,7 +143,7 @@ class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
     }
 
     private fun findWheal(te: IGregTechTileEntity) {
-        wheal = GTWorldUtil.getTileOffset<BaseTileEntityModel>(te, GTWorldUtil.vectorOffset(te, 0, 0, -1))
+        wheal = GTWorldUtil.getTileOffset(te, GTWorldUtil.vectorOffset(te, 0, 0, -1))
     }
 
     private fun handleWheal() {

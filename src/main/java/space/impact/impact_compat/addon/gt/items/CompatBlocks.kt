@@ -6,6 +6,7 @@ enum class CompatBlocks : CompatBaseItemContainer {
 
     WATER_WHEAL_BLOCK,
     WIND_WHEAL_BLOCK,
+    STEAM_ROTOR_BLOCK,
     ;
 
     override var mHasNotBeenSet: Boolean = false

@@ -21,12 +21,12 @@ abstract class BaseTileRotationEntityModel : BaseTileEntityModel() {
 
     override fun registerControllers(data: AnimationData) {
         data.addAnimationController(AnimationController(this, CONTROLLER, TICK) {
-            if (isAnimated) {
+            if (isActive()) {
                 it.controller.setAnimation(AnimationBuilder().addAnimation(WORK_L, ILoopType.EDefaultLoopTypes.LOOP))
                 PlayState.CONTINUE
             } else {
                 val builder = AnimationBuilder()
-                if (!isFirst) builder.addAnimation(STOP_L, ILoopType.EDefaultLoopTypes.PLAY_ONCE)
+//                if (!isFirst) builder.addAnimation(STOP_L, ILoopType.EDefaultLoopTypes.PLAY_ONCE)
                 it.controller.setAnimation(builder.addAnimation(IDLE_L, ILoopType.EDefaultLoopTypes.LOOP))
                 PlayState.CONTINUE
             }

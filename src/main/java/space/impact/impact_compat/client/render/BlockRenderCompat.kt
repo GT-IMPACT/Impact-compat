@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.OpenGlHelper
 import net.minecraft.item.Item
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
+import net.minecraftforge.common.util.ForgeDirection.*
 import org.lwjgl.opengl.GL11
 import software.bernie.geckolib3.core.IAnimatable
 import software.bernie.geckolib3.model.AnimatedGeoModel
@@ -13,18 +14,29 @@ import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer
 import software.bernie.geckolib3.util.MatrixStack
 import space.impact.impact_compat.client.interfaces.IRenderedModel
+import space.impact.impact_compat.client.models.Models
+import space.impact.impact_compat.common.tiles.BaseCompatTileEntity
 
 @Suppress("UNCHECKED_CAST")
 @SideOnly(Side.CLIENT)
 class BlockRenderCompat<T>(provider: AnimatedGeoModel<T>) : GeoBlockRenderer<T>(provider) where T : TileEntity, T : IAnimatable {
     override fun renderEarly(animatable: T, poseStack: MatrixStack, partialTick: Float, red: Float, green: Float, blue: Float, alpha: Float) {
-        when (animatable.getBlockMetadata()) {
-            2 -> rotateBlock(EnumFacing.NORTH, poseStack)
-            3 -> rotateBlock(EnumFacing.SOUTH, poseStack)
-            4 -> rotateBlock(EnumFacing.WEST, poseStack)
-            5 -> rotateBlock(EnumFacing.EAST, poseStack)
+        if (animatable is BaseCompatTileEntity) {
+            rorate(animatable.getFrontFacing().ordinal, poseStack)
+        } else {
+            rorate(animatable.getBlockMetadata(), poseStack)
         }
         super.renderEarly(animatable, poseStack, partialTick, red, green, blue, alpha)
+    }
+
+    private fun rorate(faceOrdinal: Int, poseStack: MatrixStack) {
+        when (faceOrdinal) {
+            NORTH.ordinal -> rotateBlock(EnumFacing.NORTH, poseStack)
+            SOUTH.ordinal -> rotateBlock(EnumFacing.SOUTH, poseStack)
+            WEST.ordinal -> rotateBlock(EnumFacing.WEST, poseStack)
+            EAST.ordinal -> rotateBlock(EnumFacing.EAST, poseStack)
+            else -> Unit
+        }
     }
 
     override fun renderTileEntityAt(te: TileEntity, x: Double, y: Double, z: Double, partialTick: Float) {
@@ -33,7 +45,7 @@ class BlockRenderCompat<T>(provider: AnimatedGeoModel<T>) : GeoBlockRenderer<T>(
 }
 
 @SideOnly(Side.CLIENT)
-class BlockItemRenderCompat<T>(provider: AnimatedGeoModel<T>) : GeoItemRenderer<T>(provider) where T : IAnimatable, T : Item {
+class BlockItemRenderCompat<T>(provider: Models<T>) : GeoItemRenderer<T>(provider) where T : IAnimatable, T : Item {
     override fun renderEarly(animatable: T, poseStack: MatrixStack, partialTick: Float, red: Float, green: Float, blue: Float, alpha: Float) {
         GL11.glEnable(GL11.GL_BLEND)
         OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0)

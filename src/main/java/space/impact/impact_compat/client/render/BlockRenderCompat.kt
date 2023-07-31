@@ -22,14 +22,14 @@ import space.impact.impact_compat.common.tiles.BaseCompatTileEntity
 class BlockRenderCompat<T>(provider: AnimatedGeoModel<T>) : GeoBlockRenderer<T>(provider) where T : TileEntity, T : IAnimatable {
     override fun renderEarly(animatable: T, poseStack: MatrixStack, partialTick: Float, red: Float, green: Float, blue: Float, alpha: Float) {
         if (animatable is BaseCompatTileEntity) {
-            rorate(animatable.getFrontFacing().ordinal, poseStack)
+            rotate(animatable.getFrontFacing().ordinal, poseStack)
         } else {
-            rorate(animatable.getBlockMetadata(), poseStack)
+            rotate(animatable.getBlockMetadata(), poseStack)
         }
         super.renderEarly(animatable, poseStack, partialTick, red, green, blue, alpha)
     }
 
-    private fun rorate(faceOrdinal: Int, poseStack: MatrixStack) {
+    private fun rotate(faceOrdinal: Int, poseStack: MatrixStack) {
         when (faceOrdinal) {
             NORTH.ordinal -> rotateBlock(EnumFacing.NORTH, poseStack)
             SOUTH.ordinal -> rotateBlock(EnumFacing.SOUTH, poseStack)

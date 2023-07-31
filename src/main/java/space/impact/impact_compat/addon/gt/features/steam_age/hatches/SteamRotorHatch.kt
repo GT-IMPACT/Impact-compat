@@ -8,6 +8,7 @@ import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch
 import gregtech.api.render.TextureFactory
 import mcp.mobius.waila.api.IWailaConfigHandler
 import mcp.mobius.waila.api.IWailaDataAccessor
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -18,13 +19,14 @@ import space.impact.impact_compat.addon.gt.features.steam_age.api.IKinetic
 import space.impact.impact_compat.addon.gt.features.steam_age.api.KineticLogicStore
 import space.impact.impact_compat.addon.gt.features.steam_age.api.KineticSpeed
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
+import space.impact.impact_compat.addon.gt.util.textures.factory
 import space.impact.impact_compat.common.util.merch.Tags
 import space.impact.impact_compat.core.NBT
 
 class SteamRotorHatch : GT_MetaTileEntity_Hatch, IKinetic {
 
     companion object {
-        private const val LOCAL_NAME = "compact.hatch.primitive_mill_rotor"
+        private const val LOCAL_NAME = "compat.hatch.primitive_mill_rotor"
     }
 
     private var speed: KineticSpeed = KineticSpeed.STOP
@@ -41,21 +43,26 @@ class SteamRotorHatch : GT_MetaTileEntity_Hatch, IKinetic {
     }
 
     override fun getTexturesActive(aBaseTexture: ITexture): Array<ITexture> {
-        return arrayOf(aBaseTexture, TextureFactory.of(Textures.BlockIcons.OVERLAY_ME_INPUT_HATCH_ACTIVE))
+        return arrayOf(aBaseTexture, Textures.BlockIcons.OVERLAY_ME_INPUT_HATCH_ACTIVE.factory())
     }
 
     override fun getTexturesInactive(aBaseTexture: ITexture): Array<ITexture> {
-        return arrayOf(aBaseTexture, TextureFactory.of(Textures.BlockIcons.OVERLAY_ME_INPUT_HATCH))
+        return arrayOf(aBaseTexture, Textures.BlockIcons.OVERLAY_ME_INPUT_HATCH.factory())
     }
 
     override fun getTexture(
         te: IGregTechTileEntity, side: ForgeDirection, aFacing: ForgeDirection,
         colorIndex: Int, aActive: Boolean, redstoneLevel: Boolean
     ): Array<ITexture> {
-        val base = TextureFactory.of(CompatTextures.MACHINE_CASE_BRONZE)
+        val base = CompatTextures.MACHINE_CASE_BRONZE.factory()
         if (side == aFacing) return if (aActive) getTexturesActive(base) else getTexturesInactive(base)
         return arrayOf(base)
     }
+
+    override fun isSimpleMachine() = true
+    override fun isAccessAllowed(aPlayer: EntityPlayer?) = true
+    override fun isFacingValid(facing: ForgeDirection) = true
+    override fun isOutputFacing(side: ForgeDirection) = side == baseMetaTileEntity.frontFacing
 
     override fun hasInput(): Boolean = true
     override fun hasOutput(): Boolean = false
@@ -76,10 +83,6 @@ class SteamRotorHatch : GT_MetaTileEntity_Hatch, IKinetic {
     override fun saveNBTData(aNBT: NBTTagCompound) {
         super.saveNBTData(aNBT)
         aNBT.setInteger(NBT.NBT_SPEED, speed.speed)
-    }
-
-    override fun isFacingValid(facing: ForgeDirection): Boolean {
-        return true
     }
 
     override fun onPostTick(te: IGregTechTileEntity, aTick: Long) {

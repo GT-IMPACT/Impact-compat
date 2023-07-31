@@ -26,8 +26,15 @@ abstract class ModelBlockBase(
     material: Material,
 ) : Block(material) {
 
+    companion object {
+        protected const val WRENCH = "wrench"
+    }
+
     init {
         setBlockName(blockName)
+        super.setHarvestLevel(WRENCH, 1)
+        setHardness(5.0f)
+        setResistance(6.0f)
         GameRegistry.registerBlock(this, GeoItemBlock::class.java, blockName)
     }
 

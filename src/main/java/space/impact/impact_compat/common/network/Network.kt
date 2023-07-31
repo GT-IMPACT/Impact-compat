@@ -39,6 +39,7 @@ object Network {
     fun registerPackets() {
         registerPacket(PacketUpdateModelAnimate)
         registerPacket(PacketStartBaseTile)
+        registerPacket(PacketChangeSide)
         registerPacket(PacketSteamRotor)
     }
 }

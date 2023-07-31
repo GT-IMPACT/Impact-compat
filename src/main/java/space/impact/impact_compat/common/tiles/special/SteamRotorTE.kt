@@ -21,6 +21,7 @@ import space.impact.impact_compat.common.tiles.BaseTileRotationEntityModel
 import space.impact.impact_compat.core.NBT
 import space.impact.impact_compat.core.WorldAround
 import space.impact.impact_compat.core.WorldTick
+import space.impact.impact_compat.core.WorldTick.of
 import space.impact.packet_network.network.NetworkHandler.sendToAllAround
 
 class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, IKinetic {
@@ -87,7 +88,7 @@ class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, I
     }
 
     override fun onPostTick(tick: Long) {
-        if (isServerSide() && tick % WorldTick.SECOND == 0L) {
+        if (isServerSide() && tick of WorldTick.SECOND) {
             if (mFluid?.amount == ZERO && speed != KineticSpeed.STOP) {
                 speed = KineticSpeed.STOP
             }

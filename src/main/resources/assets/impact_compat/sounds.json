@@ -1,0 +1,11 @@
+{
+  "machine.forge_hammer": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "forge_hammer",
+        "stream": false
+      }
+    ]
+  }
+}

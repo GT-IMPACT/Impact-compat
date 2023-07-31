@@ -63,6 +63,6 @@ class InitCommon : InitSide {
     }
 
     override fun postInit(e: FMLPostInitializationEvent) {
-
+        GTAddon.postInit()
     }
 }

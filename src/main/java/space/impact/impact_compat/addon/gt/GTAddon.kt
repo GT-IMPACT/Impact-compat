@@ -1,5 +1,6 @@
 package space.impact.impact_compat.addon.gt
 
+import space.impact.impact_compat.addon.gt.features.steam_age.recipes.SteamAgeForgeHammerRecipes
 import space.impact.impact_compat.addon.gt.register.*
 
 object GTAddon {
@@ -14,5 +15,9 @@ object GTAddon {
         initHatches()
         initSingles()
         initMultis()
+    }
+
+    fun postInit() {
+        SteamAgeForgeHammerRecipes.addRecipes()
     }
 }

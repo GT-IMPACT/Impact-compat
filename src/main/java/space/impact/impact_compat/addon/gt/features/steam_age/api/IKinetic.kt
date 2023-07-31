@@ -36,12 +36,20 @@ enum class KineticSpeed(val speed: Int) {
     MEDIUM(2),
     HIGH(4);
 
+    fun saveNBT(nbt: NBTTagCompound) {
+        nbt.setInteger(NBT.NBT_SPEED, this.speed)
+    }
+
     companion object {
         fun typeOf(speed: Int) = when(speed) {
             4 -> HIGH
             2 -> MEDIUM
             1 -> LOW
             else -> STOP
+        }
+
+        fun loadNBT(nbt: NBTTagCompound): KineticSpeed {
+            return KineticSpeed.typeOf(nbt.getInteger(NBT.NBT_SPEED))
         }
     }
 }

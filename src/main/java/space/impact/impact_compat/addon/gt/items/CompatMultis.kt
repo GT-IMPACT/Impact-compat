@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack
 
 enum class CompatMultis : CompatBaseItemContainer {
 
-
+    STEAM_KINETIC_FORGE_HAMMER
     ;
 
     override var mHasNotBeenSet: Boolean = false

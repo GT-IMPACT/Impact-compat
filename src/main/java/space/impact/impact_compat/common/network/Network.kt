@@ -5,6 +5,7 @@ import space.impact.impact_compat.addon.gt.features.steam_age.api.IKinetic
 import space.impact.impact_compat.addon.gt.features.steam_age.api.KineticSpeed
 import space.impact.impact_compat.common.tiles.BaseCompatTileEntity
 import space.impact.impact_compat.common.tiles.BaseTileEntityModel
+import space.impact.impact_compat.common.tiles.IBlockActive
 import space.impact.packet_network.network.packets.createPacketStream
 import space.impact.packet_network.network.registerPacket
 
@@ -36,10 +37,15 @@ object Network {
         if (!isServer) (tileEntity as? IKinetic)?.changeSpeed(speed)
     }
 
+    val PacketChangeActive = createPacketStream(3004) {isServer, data ->
+        if (!isServer) (tileEntity as? IBlockActive)?.setActive(data.readBoolean())
+    }
+
     fun registerPackets() {
         registerPacket(PacketUpdateModelAnimate)
         registerPacket(PacketStartBaseTile)
         registerPacket(PacketChangeSide)
         registerPacket(PacketSteamRotor)
+        registerPacket(PacketChangeActive)
     }
 }

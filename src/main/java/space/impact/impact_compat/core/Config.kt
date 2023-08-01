@@ -7,6 +7,8 @@ object Config {
 
     private const val GENERAL = "GENERAL"
 
+    var isEnabledLowPerformance: Boolean = false
+
     private inline fun onPostCreate(configFile: File?, crossinline action: (Configuration) -> Unit) {
         Configuration(configFile).also { config ->
             config.load()
@@ -21,7 +23,7 @@ object Config {
         val config = File(File(configFile, "IMPACT"), "COMPAT.cfg")
         onPostCreate(config) { cfg ->
             CLog.isDebug = cfg[GENERAL, "isEnableDebugLog", false].boolean
-
+            isEnabledLowPerformance = cfg[GENERAL, "isEnabledLowPerformance", false].boolean
         }
     }
 }

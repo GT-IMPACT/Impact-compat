@@ -19,4 +19,5 @@ private fun initBlockModels() {
 
 private fun initStructureBlocks() {
     CompatBlocks.BRONZE_MACHINE_CASING.set(SteamAgeBlocks.INSTANCE.register(SteamAgeBlocks.META_BRONZE_MACHINE_CASING))
+    CompatBlocks.BRONZE_FIREBOX_CASING.set(SteamAgeBlocks.INSTANCE.register(SteamAgeBlocks.META_BRONZE_FIREBOX_CASING))
 }

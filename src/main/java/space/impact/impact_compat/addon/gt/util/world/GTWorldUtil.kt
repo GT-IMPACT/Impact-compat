@@ -30,10 +30,6 @@ object GTWorldUtil {
         return offset
     }
 
-    fun vectorOffsetOutside(te: IGregTechTileEntity, x: Int, y: Int, z: Int): Vec3 {
-        return vectorOffset(te, x + te.xCoord, y + te.yCoord, z + te.zCoord)
-    }
-
     fun getBlockOffset(gte: IGregTechTileEntity, pos: Vec3): Block {
         return gte.getBlockOffset(pos.x, pos.y, pos.z)
     }

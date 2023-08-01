@@ -5,8 +5,8 @@ import space.impact.impact_compat.client.models.Models
 
 import space.impact.impact_compat.client.render.BlockItemRenderCompat
 import space.impact.impact_compat.client.render.BlockRenderCompat
-import space.impact.impact_compat.common.tiles.WaterWhealTE
-import space.impact.impact_compat.common.tiles.WindWhealTE
+import space.impact.impact_compat.common.init.tileentities.WaterWhealTE
+import space.impact.impact_compat.common.init.tileentities.WindWhealTE
 import space.impact.impact_compat.common.tiles.special.SteamRotorTE
 import space.impact.impact_compat.common.util.forge.RenderModelUtil
 

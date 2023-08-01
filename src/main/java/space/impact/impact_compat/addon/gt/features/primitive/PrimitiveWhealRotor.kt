@@ -12,10 +12,10 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.biome.BiomeGenBase
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.util.world.GTWorldUtil
+import space.impact.impact_compat.common.init.tileentities.WaterWhealTE
+import space.impact.impact_compat.common.init.tileentities.WindWhealTE
 import space.impact.impact_compat.common.network.Network
 import space.impact.impact_compat.common.tiles.BaseTileRotationEntityModel
-import space.impact.impact_compat.common.tiles.WaterWhealTE
-import space.impact.impact_compat.common.tiles.WindWhealTE
 import space.impact.impact_compat.core.NBT
 import space.impact.impact_compat.core.Strings
 import space.impact.impact_compat.core.WorldAround

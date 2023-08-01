@@ -13,7 +13,11 @@ import space.impact.impact_compat.MODID
 
 enum class CompatTextures : IIconContainer, Runnable {
 
-    MACHINE_CASE_BRONZE,
+    CASE_MACHINE_BRONZE,
+    CASE_FIREBOX_BRONZE,
+    CASE_FIREBOX_BRONZE_ACTIVE,
+    CASE_FIREBOX_BRONZE_DOOR_OVERLAY,
+    CASE_FIREBOX_BRONZE_DOOR_OVERLAY_ACTIVE,
 
     ;
 
@@ -37,7 +41,6 @@ enum class CompatTextures : IIconContainer, Runnable {
 
     override fun run() {
         mIcon = GregTech_API.sBlockIcons.registerIcon("$MODID:iconsents/$this")
-        init()
     }
 }
 

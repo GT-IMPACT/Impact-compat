@@ -10,7 +10,8 @@ enum class CompatBlocks : CompatBaseItemContainer {
     STEAM_ROTOR_BLOCK,
 
     //Block Structure
-    BRONZE_MACHINE_CASING
+    BRONZE_MACHINE_CASING,
+    BRONZE_FIREBOX_CASING,
 
     ;
 

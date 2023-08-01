@@ -14,12 +14,10 @@ import gregtech.api.enums.Textures.BlockIcons
 import gregtech.api.interfaces.ITexture
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
-import gregtech.api.objects.XSTR
 import gregtech.api.render.TextureFactory
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder
 import gregtech.api.util.GT_Recipe
 import gregtech.api.util.GT_StructureUtility.buildHatchAdder
-import gregtech.api.util.WorldSpawnedEventBuilder.ParticleEventBuilder
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.util.ForgeDirection
@@ -30,6 +28,9 @@ import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
 import space.impact.impact_compat.addon.gt.util.textures.HATCH_INDEX_MACHINE_CASE_BRONZE
 import space.impact.impact_compat.addon.gt.util.textures.factory
+import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addInputBusCount
+import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOtherStructurePartCount
+import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputBusCount
 import space.impact.impact_compat.addon.gt.util.world.GTParticles
 import space.impact.impact_compat.common.util.merch.Tags
 import space.impact.impact_compat.common.util.sound.SoundRes
@@ -77,7 +78,7 @@ class MultiSteamKineticForgeHammer : KineticMultiBlockBase<MultiSteamKineticForg
         te: IGregTechTileEntity, side: ForgeDirection, facing: ForgeDirection,
         colorIndex: Int, active: Boolean, redstoneLevel: Boolean,
     ): Array<ITexture> {
-        val base = CompatTextures.MACHINE_CASE_BRONZE.factory()
+        val base = CompatTextures.CASE_MACHINE_BRONZE.factory()
         if (side == facing) return arrayOf(
             base,
             if (active) BlockIcons.OVERLAY_FRONT_STEAM_HAMMER_ACTIVE.factory()
@@ -107,8 +108,12 @@ class MultiSteamKineticForgeHammer : KineticMultiBlockBase<MultiSteamKineticForg
     }
 
     override fun createTooltip(): GT_Multiblock_Tooltip_Builder {
-        return GT_Multiblock_Tooltip_Builder()
-            .addInfo("bla bla bla")
+        return GT_Multiblock_Tooltip_Builder() //TODO
+            .addMachineType("Forge Hammer")
+            .beginStructureBlock(3, 3, 3, false)
+            .addOtherStructurePartCount("Machine Rotor Hatch", dot = 1)
+            .addInputBusCount(dot = 1)
+            .addOutputBusCount(dot = 1)
             .apply { toolTipFinisher(Tags.IMPACT_GREGTECH) }
     }
 

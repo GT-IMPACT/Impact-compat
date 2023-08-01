@@ -5,7 +5,6 @@ import gregtech.api.interfaces.ITexture
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
 import gregtech.api.metatileentity.MetaTileEntity
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch
-import gregtech.api.render.TextureFactory
 import mcp.mobius.waila.api.IWailaConfigHandler
 import mcp.mobius.waila.api.IWailaDataAccessor
 import net.minecraft.entity.player.EntityPlayer
@@ -54,7 +53,7 @@ class SteamRotorHatch : GT_MetaTileEntity_Hatch, IKinetic {
         te: IGregTechTileEntity, side: ForgeDirection, aFacing: ForgeDirection,
         colorIndex: Int, aActive: Boolean, redstoneLevel: Boolean
     ): Array<ITexture> {
-        val base = CompatTextures.MACHINE_CASE_BRONZE.factory()
+        val base = CompatTextures.CASE_MACHINE_BRONZE.factory()
         if (side == aFacing) return if (aActive) getTexturesActive(base) else getTexturesInactive(base)
         return arrayOf(base)
     }

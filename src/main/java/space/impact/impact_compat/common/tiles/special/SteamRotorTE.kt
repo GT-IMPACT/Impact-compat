@@ -30,9 +30,9 @@ class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, I
         private const val WORK_SPEED4 = "work.speed.4"
         private const val WORK_SPEED2 = "work.speed.2"
         private const val WORK_SPEED1 = "work.speed.1"
-        private val LOW_BOUND = 50..249
-        private val MEDIUM_BOUND = 250..999
-        private val HIGH_BOUND = 1000..Int.MAX_VALUE
+        private val LOW_BOUND = 50..499
+        private val MEDIUM_BOUND = 501..1999
+        private val HIGH_BOUND = 2000..Int.MAX_VALUE
         private const val ZERO = 0
         private const val CAPACITY = 10_000
         private const val STEAM_FLUID = "steam"
@@ -41,6 +41,7 @@ class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, I
     private var mFluid: FluidStack? = null
     private var speed: KineticSpeed = KineticSpeed.STOP
     private var oSpeed: KineticSpeed = KineticSpeed.STOP
+    private var lastFlow: Int = 0
 
     override fun registerControllers(data: AnimationData) {
         val high = AnimationBuilder().addAnimation(WORK_SPEED1, ILoopType.EDefaultLoopTypes.LOOP)
@@ -89,19 +90,32 @@ class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, I
 
     override fun onPostTick(tick: Long) {
         if (isServerSide() && tick of WorldTick.SECOND) {
-            if (mFluid?.amount == ZERO && speed != KineticSpeed.STOP) {
-                speed = KineticSpeed.STOP
-            }
-            if (speed != KineticSpeed.STOP) {
-                mFluid?.also {
-                    it.amount = -when (speed) {
-                        KineticSpeed.HIGH -> HIGH_BOUND.first
-                        KineticSpeed.MEDIUM -> MEDIUM_BOUND.first
-                        KineticSpeed.LOW -> LOW_BOUND.first
-                        else -> ZERO
+            if (lastFlow > ZERO) {
+                val amount = lastFlow + ZERO
+                lastFlow -= when {
+                    amount - 2400 >= ZERO -> {
+                        speed = KineticSpeed.HIGH
+                        2400
                     }
-                    if (it.amount <= ZERO) it.amount = ZERO
+
+                    amount - 800 >= ZERO -> {
+                        speed = KineticSpeed.MEDIUM
+                        800
+                    }
+
+                    amount - 400 >= ZERO -> {
+                        speed = KineticSpeed.LOW
+                        400
+                    }
+
+                    else -> {
+                        speed = KineticSpeed.STOP
+                        ZERO
+                    }
                 }
+                if (lastFlow <= ZERO) lastFlow = ZERO
+            } else {
+                speed = KineticSpeed.STOP
             }
             updateSpeed()
         }
@@ -121,7 +135,7 @@ class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, I
     override fun getTankInfo(from: ForgeDirection?): Array<FluidTankInfo> {
         val tList = ArrayList<FluidTankInfo>()
         if (from == getFrontFacing()) {
-            tList.add(FluidTankInfo(mFluid, HIGH_BOUND.first))
+            tList.add(FluidTankInfo(mFluid, CAPACITY))
         }
         return tList.toTypedArray<FluidTankInfo>()
     }
@@ -147,30 +161,16 @@ class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, I
             if (mFluid == null && resource.getFluid().name.contains(STEAM_FLUID, true)) {
                 mFluid = resource.copy()
             }
-            return when (resource.amount) {
-                in HIGH_BOUND -> {
-                    speed = KineticSpeed.HIGH
-                    mFluid?.amount = mFluid?.amount?.plus(HIGH_BOUND.first)
-                    HIGH_BOUND.first
-                }
-
-                in MEDIUM_BOUND -> {
-                    speed = KineticSpeed.MEDIUM
-                    mFluid?.amount = mFluid?.amount?.plus(resource.amount)
-                    resource.amount
-                }
-
-                in LOW_BOUND -> {
-                    speed = KineticSpeed.LOW
-                    mFluid?.amount = mFluid?.amount?.plus(resource.amount)
-                    resource.amount
-                }
-
-                else -> {
-                    speed = KineticSpeed.STOP
-                    ZERO
-                }
+            val amount = lastFlow + ZERO
+            var filled = 0
+            if (amount + resource.amount >= CAPACITY) {
+                if (doFill) lastFlow = CAPACITY
+                filled = CAPACITY - amount
+            } else {
+                if (doFill) lastFlow += resource.amount
+                filled = resource.amount
             }
+            return filled
         }
         return ZERO
     }

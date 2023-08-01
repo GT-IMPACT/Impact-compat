@@ -16,10 +16,6 @@ import space.impact.impact_compat.core.NBT
 abstract class BaseTileEntityModel : BaseCompatTileEntity(), IAnimatable {
 
     companion object {
-        fun registerTEModel(clazz: Class<out TileEntity>, tileId: String) {
-            GameRegistry.registerTileEntity(clazz, tileId)
-        }
-
         const val CONTROLLER = "controller"
         const val TICK = 0f
         private const val WORK = "work"

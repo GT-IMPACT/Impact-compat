@@ -4,7 +4,7 @@ import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
-import space.impact.impact_compat.common.tiles.WindWhealTE
+import space.impact.impact_compat.common.init.tileentities.WindWhealTE
 
 class WindWhealBlock : ModelBlockBase("wind_wheal", Material.wood), ITileEntityProvider {
 

@@ -1,12 +1,9 @@
 package space.impact.impact_compat.addon.gt.base.multi
 
-import gregtech.api.interfaces.IHatchElement
-import gregtech.api.interfaces.metatileentity.IMetaTileEntity
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch
 import gregtech.api.util.GT_Recipe
 import gregtech.api.util.GT_Single_Recipe_Check
-import gregtech.api.util.IGT_HatchAdder
 import mcp.mobius.waila.api.IWailaConfigHandler
 import mcp.mobius.waila.api.IWailaDataAccessor
 import net.minecraft.entity.player.EntityPlayerMP
@@ -18,23 +15,12 @@ import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.fluids.FluidStack
 import space.impact.impact_compat.addon.gt.features.steam_age.api.IKinetic
 import space.impact.impact_compat.addon.gt.features.steam_age.api.KineticSpeed
-import space.impact.impact_compat.addon.gt.features.steam_age.hatches.SteamRotorHatch
 import space.impact.impact_compat.core.WorldTick
 import space.impact.impact_compat.core.WorldTick.of
 
 abstract class KineticMultiBlockBase<T> : CompatMultiBlockBase<T>, IKinetic where T : CompatMultiBlockBase<T> {
 
-    companion object {
-        @JvmStatic
-        protected val RotorHatch = object : IHatchElement<KineticMultiBlockBase<*>> {
-            override fun mteClasses(): MutableList<out Class<out IMetaTileEntity>> = mutableListOf(SteamRotorHatch::class.java)
-            override fun adder(): IGT_HatchAdder<in KineticMultiBlockBase<*>> = IGT_HatchAdder { base, te, index -> base.addKineticHatch(te, index) }
-            override fun name(): String = "RotorHatch"
-            override fun count(t: KineticMultiBlockBase<*>): Long = t.rotorHatches.size.toLong()
-        }
-    }
-
-    protected val rotorHatches: ArrayList<IKinetic> = arrayListOf()
+    internal val rotorHatches: ArrayList<IKinetic> = arrayListOf()
     protected var speedRotor: KineticSpeed = KineticSpeed.STOP
 
     constructor(id: Int, name: String, unlocalized: String, isEnabledMaintenance: Boolean = true) : super(id, name, unlocalized, isEnabledMaintenance)

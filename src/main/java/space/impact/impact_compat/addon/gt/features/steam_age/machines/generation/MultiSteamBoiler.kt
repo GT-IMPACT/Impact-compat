@@ -1,7 +1,8 @@
-package space.impact.impact_compat.addon.gt.features.steam_age.machines
+package space.impact.impact_compat.addon.gt.features.steam_age.machines.generation
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition
+import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment
 import com.gtnewhorizon.structurelib.structure.StructureDefinition
 import com.gtnewhorizon.structurelib.structure.StructureUtility.lazy
 import com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock
@@ -18,21 +19,22 @@ import gregtech.api.util.GT_Utility.formatNumbers
 import mcp.mobius.waila.api.IWailaConfigHandler
 import mcp.mobius.waila.api.IWailaDataAccessor
 import mcp.mobius.waila.api.SpecialChars
-import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.tileentity.TileEntity
-import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.base.multi.CompatMultiBlockBase
 import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlocks
+import space.impact.impact_compat.addon.gt.features.steam_age.machines.processing.MultiSteamKineticForgeHammer
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
 import space.impact.impact_compat.addon.gt.util.textures.HATCH_INDEX_MACHINE_CASE_BRONZE
 import space.impact.impact_compat.addon.gt.util.textures.factory
+import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addSteamMachineStructure
 import space.impact.impact_compat.addon.gt.util.world.GTWorldUtil
+import space.impact.impact_compat.addon.gt.util.world.checkCountHatches
 import space.impact.impact_compat.common.tiles.NonTickableTileBlock
 import space.impact.impact_compat.common.util.merch.Tags
+import space.impact.impact_compat.common.util.world.Vec3
 import space.impact.impact_compat.core.Config
 import space.impact.impact_compat.core.NBT
 import space.impact.impact_compat.core.WorldTick
@@ -64,11 +66,11 @@ class MultiSteamBoiler : CompatMultiBlockBase<MultiSteamBoiler>, ISurvivalConstr
                     .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, SteamAgeBlocks.META_BRONZE_MACHINE_CASING)
             })
             .build()
+        private val OFFSET_STRUCTURE = Vec3(1, 4, 0)
     }
 
     private var fireBoxes = arrayListOf<NonTickableTileBlock>()
     private var mActive: Boolean = false
-    private var oActive: Boolean = false
     private var mSuperEfficiencyIncrease = 0
     private var excessWater = 0
     private var excessFuel = 0
@@ -119,9 +121,8 @@ class MultiSteamBoiler : CompatMultiBlockBase<MultiSteamBoiler>, ISurvivalConstr
         super.onRemoval()
     }
 
-    override fun onPostTick(te: IGregTechTileEntity, aTick: Long) {
-        super.onPostTick(te, aTick)
-        if (!Config.isEnabledLowPerformance && te.isServerSide && aTick of WorldTick.SECOND) {
+    override fun performanceLogic(te: IGregTechTileEntity, tick: Long) {
+        if (te.isServerSide && tick of WorldTick.SECOND) {
             if (fireBoxes.any { it.isActive() } != te.isActive) {
                 fireBoxes.forEach { it.setActive(baseMetaTileEntity.isActive) }
             }
@@ -233,14 +234,14 @@ class MultiSteamBoiler : CompatMultiBlockBase<MultiSteamBoiler>, ISurvivalConstr
 
     override fun checkMachine(te: IGregTechTileEntity, aStack: ItemStack?): Boolean {
         fireBoxes.clear()
-        val isBuild = checkPiece(MAIN, 1, 4, 0)
+        val isBuild = checkPiece(MAIN, OFFSET_STRUCTURE)
         for (x in -1..1) {
             for (z in 0 downTo -2) {
                 val iBlock = GTWorldUtil.getTileOffset<NonTickableTileBlock>(te, GTWorldUtil.vectorOffset(te, x, 0, z))
                 if (iBlock != null) fireBoxes.add(iBlock)
             }
         }
-        val isCompleted = isBuild && fireBoxes.size == 8 && mInputBusses.size <= 1 && mInputHatches.size <= 2 && mOutputHatches.size <= 9
+        val isCompleted = isBuild && fireBoxes.size == 8 && checkCountHatches(inBus = 1, inHatch = 3, outHatch = 9)
         if (!isCompleted) mActive = false
         return isCompleted
     }
@@ -261,21 +262,24 @@ class MultiSteamBoiler : CompatMultiBlockBase<MultiSteamBoiler>, ISurvivalConstr
             .addInfo(String.format("Diesel fuels have 1/4 efficiency - Takes %s seconds to heat up", formatNumbers(500.0 / EFFICIENCY_INCREASE)))
             .addSeparator()
             .beginStructureBlock(3, 5, 3, false)
-            .addCasingInfoRange("Bronze Machine Casing", 18, 31, false)
-            .addOtherStructurePart("Bronze Fire Boxes", "Bottom layer, 3 minimum")
-            .addInputBus("Solid fuel / Water, Any casing", 1)
-            .addInputHatch("Liquid fuel, Any casing", 1)
-            .addStructureInfo("You can use either, or both")
-            .addOutputHatch("Steam, Any casing", 1)
+            .addSteamMachineStructure(18..31, 8)
+            .addInputBus("Solid fuel, Any casing", 1)
+            .addInputHatch("Liquid fuel or Water, Any casing", 3)
+            .addOutputHatch("Steam, Any casing", 9)
             .apply { toolTipFinisher(Tags.IMPACT_GREGTECH) }
     }
 
     override fun construct(stackSize: ItemStack?, hintsOnly: Boolean) {
-        buildPiece(MAIN, stackSize, hintsOnly, 1, 4, 0)
+        buildPiece(MAIN, stackSize, hintsOnly, OFFSET_STRUCTURE)
     }
 
     override fun useModularUI(): Boolean {
         return false
+    }
+
+    override fun survivalConstruct(stackSize: ItemStack?, elementBudget: Int, env: ISurvivalBuildEnvironment?): Int {
+        return if (mMachine) -1
+        else survivalBuildPiece(MAIN, stackSize, OFFSET_STRUCTURE, elementBudget, env)
     }
 
     override fun getStructureDefinition(): IStructureDefinition<MultiSteamBoiler>? = STRUCTURE
@@ -291,9 +295,5 @@ class MultiSteamBoiler : CompatMultiBlockBase<MultiSteamBoiler>, ISurvivalConstr
         currentTip.add(String.format("Facing: %s", baseMetaTileEntity.frontFacing.name))
         val isActive = tag.getBoolean("isActive")
         currentTip.add(GT_Waila.getMachineProgressString(isActive, tag.getInteger("maxProgress"), tag.getInteger("progress")))
-    }
-
-    override fun getWailaNBTData(player: EntityPlayerMP?, tile: TileEntity?, tag: NBTTagCompound, world: World?, x: Int, y: Int, z: Int) {
-        super.getWailaNBTData(player, tile, tag, world, x, y, z)
     }
 }

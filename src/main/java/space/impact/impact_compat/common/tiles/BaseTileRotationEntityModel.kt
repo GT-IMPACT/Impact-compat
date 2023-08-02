@@ -19,7 +19,7 @@ abstract class BaseTileRotationEntityModel : BaseTileEntityModel() {
         private const val IDLE_L = "idle.left"
     }
 
-    override fun registerControllers(data: AnimationData) {
+    override fun animation(data: AnimationData) {
         data.addAnimationController(AnimationController(this, CONTROLLER, TICK) {
             if (isActive()) {
                 it.controller.setAnimation(AnimationBuilder().addAnimation(WORK_L, ILoopType.EDefaultLoopTypes.LOOP))

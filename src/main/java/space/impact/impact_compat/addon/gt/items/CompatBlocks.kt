@@ -12,6 +12,7 @@ enum class CompatBlocks : CompatBaseItemContainer {
     //Block Structure
     BRONZE_MACHINE_CASING,
     BRONZE_FIREBOX_CASING,
+    BRONZE_GLASS_CASING,
 
     ;
 

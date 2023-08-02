@@ -5,5 +5,8 @@ steam.rotor.stop=Not Working
 steam.rotor.speed=Speed
 
 tile.steam_rotor.name=Bronze Steam Kinetic Turbine
+
 tile.compat.steam_age.block.0.name=Bronze Machine Casing
 tile.compat.steam_age.block.1.name=Bronze Firebox Casing
+
+tile.compat.steam_age.glass.0.name=Bronze Glass

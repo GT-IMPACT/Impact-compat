@@ -2,7 +2,7 @@ package space.impact.impact_compat.addon.gt.register
 
 import space.impact.impact_compat.addon.gt.GTAddon
 import space.impact.impact_compat.addon.gt.features.primitive.PrimitiveWhealRotor
-import space.impact.impact_compat.addon.gt.features.steam_age.hatches.SteamRotorHatch
+import space.impact.impact_compat.addon.gt.features.steam_age.machines.hatch.SteamRotorHatch
 import space.impact.impact_compat.addon.gt.items.CompatHatches
 import space.impact.impact_compat.core.CLog
 

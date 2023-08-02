@@ -1,8 +1,6 @@
 package space.impact.impact_compat.common.tiles
 
-import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.tileentity.TileEntity
 import software.bernie.geckolib3.core.IAnimatable
 import software.bernie.geckolib3.core.PlayState
 import software.bernie.geckolib3.core.builder.AnimationBuilder
@@ -11,6 +9,7 @@ import software.bernie.geckolib3.core.controller.AnimationController
 import software.bernie.geckolib3.core.manager.AnimationData
 import software.bernie.geckolib3.core.manager.AnimationFactory
 import software.bernie.geckolib3.util.GeckoLibUtil
+import space.impact.impact_compat.core.Config
 import space.impact.impact_compat.core.NBT
 
 abstract class BaseTileEntityModel : BaseCompatTileEntity(), IAnimatable {
@@ -30,10 +29,14 @@ abstract class BaseTileEntityModel : BaseCompatTileEntity(), IAnimatable {
 
 
     private val factory = GeckoLibUtil.createFactory(this)
-    override fun getFactory(): AnimationFactory = factory
+    final override fun getFactory(): AnimationFactory = factory
     override fun canUpdate() = false
 
-    override fun registerControllers(data: AnimationData) {
+    final override fun registerControllers(data: AnimationData) {
+        if (!Config.isEnabledLowPerformance) animation(data)
+    }
+
+    open fun animation(data: AnimationData) {
         data.addAnimationController(AnimationController(this, CONTROLLER, TICK) {
             if (isAnimated) {
                 it.controller.setAnimation(

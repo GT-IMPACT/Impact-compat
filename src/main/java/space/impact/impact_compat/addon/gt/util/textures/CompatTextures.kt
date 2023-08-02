@@ -14,6 +14,7 @@ import space.impact.impact_compat.MODID
 enum class CompatTextures : IIconContainer, Runnable {
 
     CASE_MACHINE_BRONZE,
+    CASE_GLASS_BRONZE,
     CASE_FIREBOX_BRONZE,
     CASE_FIREBOX_BRONZE_ACTIVE,
     CASE_FIREBOX_BRONZE_DOOR_OVERLAY,

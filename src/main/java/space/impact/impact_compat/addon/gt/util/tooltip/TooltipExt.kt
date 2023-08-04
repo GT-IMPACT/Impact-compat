@@ -8,6 +8,7 @@ object TooltipExt {
 
     private const val TT_ROTOR_HATCH = "Machine Rotor Hatch"
     private const val TT_BRONZE_GLASS = "Bronze Glass"
+    private const val TT_BRONZE_BRICK = "Bronze Brick"
     private const val TT_BRONZE_FIREBOX = "Bronze Firebox"
     private const val TT_BRONZE_CASE = "Bronze Machine Casing"
     private const val ONE_COUNT = 1
@@ -43,11 +44,13 @@ object TooltipExt {
     fun GT_Multiblock_Tooltip_Builder.addSteamMachineStructure(
         bronzeBlocks: IntRange = 0..0,
         bronzeFirebox: Int = 0,
-        bronzeGlasses: Int = 0
+        bronzeGlasses: Int = 0,
+        bronzeBricks: Int = 0,
     ): GT_Multiblock_Tooltip_Builder {
         if (bronzeBlocks.first > 0 && bronzeBlocks.last > 0) addOtherStructurePart(TT_BRONZE_CASE, "${bronzeBlocks.first.toCount()} - ${bronzeBlocks.last.toCount()}")
         if (bronzeFirebox > 0 ) addOtherStructurePart(TT_BRONZE_FIREBOX, bronzeFirebox.toCount())
         if (bronzeGlasses > 0 ) addOtherStructurePart(TT_BRONZE_GLASS, bronzeGlasses.toCount())
+        if (bronzeBricks > 0 ) addOtherStructurePart(TT_BRONZE_BRICK, bronzeBricks.toCount())
         return this
     }
 }

@@ -7,6 +7,8 @@ object Config {
 
     private const val GENERAL = "GENERAL"
 
+    val isDebug: Boolean = System.getenv("IMPACT_DEBUG").isNullOrEmpty()
+
     var isEnabledLowPerformance: Boolean = false
 
     private inline fun onPostCreate(configFile: File?, crossinline action: (Configuration) -> Unit) {

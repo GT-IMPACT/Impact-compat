@@ -8,5 +8,6 @@ tile.steam_rotor.name=Bronze Steam Kinetic Turbine
 
 tile.compat.steam_age.block.0.name=Bronze Machine Casing
 tile.compat.steam_age.block.1.name=Bronze Firebox Casing
+tile.compat.steam_age.block.2.name=Bronze Brick Casing
 
 tile.compat.steam_age.glass.0.name=Bronze Glass

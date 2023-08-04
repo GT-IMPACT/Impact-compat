@@ -1,8 +1,10 @@
 package space.impact.impact_compat.addon.gt.items
 
 import net.minecraft.item.ItemStack
+import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlocks
+import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeGlassBlocks
 
-enum class CompatBlocks : CompatBaseItemContainer {
+enum class CompatBlocks(val meta: Int = 0) : CompatBaseItemContainer {
 
     //Block Models
     WATER_WHEAL_BLOCK,
@@ -10,9 +12,12 @@ enum class CompatBlocks : CompatBaseItemContainer {
     STEAM_ROTOR_BLOCK,
 
     //Block Structure
-    BRONZE_MACHINE_CASING,
-    BRONZE_FIREBOX_CASING,
-    BRONZE_GLASS_CASING,
+    BRONZE_MACHINE_CASING(SteamAgeBlocks.META_BRONZE_MACHINE_CASING),
+    BRONZE_FIREBOX_CASING(SteamAgeBlocks.META_BRONZE_FIREBOX_CASING),
+    BRONZE_BRICK_CASING(SteamAgeBlocks.META_BRONZE_BRICK_CASING),
+
+    //Block Glass
+    BRONZE_GLASS_CASING(SteamAgeGlassBlocks.META_BRONZE_GLASS_MACHINE_CASING),
 
     ;
 

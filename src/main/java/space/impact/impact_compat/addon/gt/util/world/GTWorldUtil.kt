@@ -30,12 +30,16 @@ object GTWorldUtil {
         return offset
     }
 
-    fun getBlockOffset(gte: IGregTechTileEntity, pos: Vec3): Block {
+    fun vectorOffset(te: IGregTechTileEntity, vec: Vec3): Vec3 {
+        return vectorOffset(te, vec.x, vec.y, vec.z)
+    }
+
+    fun getBlockOffset(gte: IGregTechTileEntity, pos: Vec3): Block? {
         return gte.getBlockOffset(pos.x, pos.y, pos.z)
     }
 
-    fun setBlockOffset(gte: IGregTechTileEntity, pos: Vec3, block: Block, meta: Int) {
-        gte.world.setBlock(pos.x + gte.xCoord, pos.y + gte.yCoord, pos.z + gte.zCoord, block, meta, 3)
+    fun setBlockOffset(gte: IGregTechTileEntity, pos: Vec3, block: Block, meta: Int = 0, flagBlock: Int = 3) {
+        gte.world.setBlock(pos.x + gte.xCoord, pos.y + gte.yCoord, pos.z + gte.zCoord, block, meta, flagBlock)
     }
 
     inline fun <reified T : TileEntity> getTileOffset(gte: IGregTechTileEntity?, x: Int, y: Int, z: Int): T? {

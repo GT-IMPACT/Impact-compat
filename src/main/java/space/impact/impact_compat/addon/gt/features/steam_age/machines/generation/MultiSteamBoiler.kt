@@ -24,10 +24,9 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.base.multi.CompatMultiBlockBase
 import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlocks
-import space.impact.impact_compat.addon.gt.features.steam_age.machines.processing.MultiSteamKineticForgeHammer
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
-import space.impact.impact_compat.addon.gt.util.textures.HATCH_INDEX_MACHINE_CASE_BRONZE
+import space.impact.impact_compat.addon.gt.util.textures.HatchTexture
 import space.impact.impact_compat.addon.gt.util.textures.factory
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addSteamMachineStructure
 import space.impact.impact_compat.addon.gt.util.world.GTWorldUtil
@@ -57,13 +56,13 @@ class MultiSteamBoiler : CompatMultiBlockBase<MultiSteamBoiler>, ISurvivalConstr
                     arrayOf("AAA", "AAA", "AAA", "AAA", "BBB")
                 )
             )
-            .addElement('B', ofBlock(CompatBlocks.BRONZE_FIREBOX_CASING.block, SteamAgeBlocks.META_BRONZE_FIREBOX_CASING))
-            .addElement('A', lazy { t ->
+            .addElement('B', ofBlock(CompatBlocks.BRONZE_FIREBOX_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta))
+            .addElement('A', lazy { _ ->
                 buildHatchAdder(MultiSteamBoiler::class.java)
                     .atLeast(GT_HatchElement.InputBus, GT_HatchElement.InputHatch, GT_HatchElement.OutputHatch)
-                    .casingIndex(HATCH_INDEX_MACHINE_CASE_BRONZE)
+                    .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(1)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, SteamAgeBlocks.META_BRONZE_MACHINE_CASING)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)
             })
             .build()
         private val OFFSET_STRUCTURE = Vec3(1, 4, 0)

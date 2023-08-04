@@ -20,6 +20,8 @@ enum class CompatTextures : IIconContainer, Runnable {
     CASE_FIREBOX_BRONZE_DOOR_OVERLAY,
     CASE_FIREBOX_BRONZE_DOOR_OVERLAY_ACTIVE,
 
+    CASE_BRONZE_BRICK,
+    CASE_VANILA_BRICK,
     ;
 
     private var mIcon: IIcon? = null
@@ -46,3 +48,4 @@ enum class CompatTextures : IIconContainer, Runnable {
 }
 
 fun IIconContainer.factory(): ITexture = TextureFactory.of(this)
+fun IIconContainer.factoryGlow(): ITexture = TextureFactory.builder().addIcon(this).glow().build()

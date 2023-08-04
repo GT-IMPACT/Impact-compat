@@ -26,7 +26,7 @@ import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeGla
 import space.impact.impact_compat.addon.gt.features.steam_age.recipes.STEAM_COMPRESSOR_RECIPE_MAP
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
-import space.impact.impact_compat.addon.gt.util.textures.HATCH_INDEX_MACHINE_CASE_BRONZE
+import space.impact.impact_compat.addon.gt.util.textures.HatchTexture
 import space.impact.impact_compat.addon.gt.util.textures.factory
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addInputBusCount
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputBusCount
@@ -53,16 +53,16 @@ class MultiSteamKineticExtractor : KineticMultiBlockBase<MultiSteamKineticExtrac
             .addElement('A', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticExtractor::class.java)
                     .atLeast(GT_HatchElement.InputBus, GT_HatchElement.OutputBus)
-                    .casingIndex(HATCH_INDEX_MACHINE_CASE_BRONZE)
+                    .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(1)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, SteamAgeBlocks.META_BRONZE_MACHINE_CASING)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
             })
             .addElement('B', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticExtractor::class.java)
                     .atLeast(CompatHatchElement.RotorHatch)
-                    .casingIndex(HATCH_INDEX_MACHINE_CASE_BRONZE)
+                    .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, SteamAgeBlocks.META_BRONZE_MACHINE_CASING)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
             })
             .addElement('C', ofBlock(CompatBlocks.BRONZE_GLASS_CASING.block, SteamAgeGlassBlocks.META_BRONZE_GLASS_MACHINE_CASING))
             .build()
@@ -114,6 +114,5 @@ class MultiSteamKineticExtractor : KineticMultiBlockBase<MultiSteamKineticExtrac
     override fun getStructureDefinition(): IStructureDefinition<MultiSteamKineticExtractor>? = STRUCTURE
 
     @SideOnly(Side.CLIENT)
-    override fun getActivitySoundLoop(): ResourceLocation = SoundResource.IC2_MACHINES_EXTRACTOR_OP.resourceLocation
-    override fun getTimeBetweenProcessSounds(): Int = 10
+    override fun activeSound(): ResourceLocation = SoundResource.IC2_MACHINES_EXTRACTOR_OP.resourceLocation
 }

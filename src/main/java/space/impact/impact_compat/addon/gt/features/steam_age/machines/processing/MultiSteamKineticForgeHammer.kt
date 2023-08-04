@@ -24,7 +24,7 @@ import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlo
 import space.impact.impact_compat.addon.gt.features.steam_age.recipes.STEAM_FORGE_HAMMER_RECIPE_MAP
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
-import space.impact.impact_compat.addon.gt.util.textures.HATCH_INDEX_MACHINE_CASE_BRONZE
+import space.impact.impact_compat.addon.gt.util.textures.HatchTexture
 import space.impact.impact_compat.addon.gt.util.textures.factory
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addInputBusCount
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputBusCount
@@ -47,16 +47,16 @@ class MultiSteamKineticForgeHammer : KineticMultiBlockBase<MultiSteamKineticForg
             .addElement('A', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticForgeHammer::class.java)
                     .atLeast(GT_HatchElement.InputBus, GT_HatchElement.OutputBus)
-                    .casingIndex(HATCH_INDEX_MACHINE_CASE_BRONZE)
+                    .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, SteamAgeBlocks.META_BRONZE_MACHINE_CASING)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
             })
             .addElement('B', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticForgeHammer::class.java)
                     .atLeast(CompatHatchElement.RotorHatch)
-                    .casingIndex(HATCH_INDEX_MACHINE_CASE_BRONZE)
+                    .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(1)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, SteamAgeBlocks.META_BRONZE_MACHINE_CASING)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
             })
             .build()
         private val OFFSET_STRUCTURE = Vec3(1, 1, 0)
@@ -107,9 +107,8 @@ class MultiSteamKineticForgeHammer : KineticMultiBlockBase<MultiSteamKineticForg
     override fun getStructureDefinition(): IStructureDefinition<MultiSteamKineticForgeHammer>? = STRUCTURE
 
     @SideOnly(Side.CLIENT)
-    override fun getActivitySoundLoop(): ResourceLocation = SoundRes.FORGE_HAMMER.resourceLocation
+    override fun activeSound(): ResourceLocation = SoundRes.FORGE_HAMMER.resourceLocation
 
     @SideOnly(Side.CLIENT)
     override fun onRandomDisplayTick(te: IGregTechTileEntity) = GTParticles.createSparklesMainFace(te, ParticleFX.LAVA)
-    override fun getTimeBetweenProcessSounds(): Int = 10
 }

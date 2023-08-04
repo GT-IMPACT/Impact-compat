@@ -3,10 +3,12 @@
 package space.impact.impact_compat.addon.gt.features.steam_age.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
+import gregtech.api.render.TextureFactory
 import net.minecraft.block.Block
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
@@ -15,9 +17,9 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import space.impact.impact_compat.addon.gt.base.block.StructureCasingBlockBase
-import space.impact.impact_compat.common.tiles.NonTickableTileBlock
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
 import space.impact.impact_compat.common.tiles.IBlockActive
+import space.impact.impact_compat.common.tiles.NonTickableTileBlock
 import space.impact.impact_compat.common.util.translate.Translate.translate
 
 class SteamAgeBlocks : StructureCasingBlockBase(), ITileEntityProvider {
@@ -26,9 +28,10 @@ class SteamAgeBlocks : StructureCasingBlockBase(), ITileEntityProvider {
         val INSTANCE = SteamAgeBlocks()
         const val META_BRONZE_MACHINE_CASING = 0
         const val META_BRONZE_FIREBOX_CASING = 1
+        const val META_BRONZE_BRICK_CASING = 2
 
         private const val NAME = "compat.steam_age.block"
-        private const val BLOCK_COUNT = 2
+        private const val BLOCK_COUNT = 3
     }
 
     init {
@@ -46,6 +49,11 @@ class SteamAgeBlocks : StructureCasingBlockBase(), ITileEntityProvider {
         return when(meta) {
             META_BRONZE_MACHINE_CASING -> CompatTextures.CASE_MACHINE_BRONZE.icon
             META_BRONZE_FIREBOX_CASING -> if (side >= 2) CompatTextures.CASE_FIREBOX_BRONZE.icon else CompatTextures.CASE_MACHINE_BRONZE.icon
+            META_BRONZE_BRICK_CASING -> when (side) {
+                0 -> CompatTextures.CASE_VANILA_BRICK.icon
+                1 -> CompatTextures.CASE_MACHINE_BRONZE.icon
+                else -> CompatTextures.CASE_BRONZE_BRICK.icon
+            }
             else -> null
         }
     }
@@ -54,13 +62,17 @@ class SteamAgeBlocks : StructureCasingBlockBase(), ITileEntityProvider {
         val meta = world.getBlockMetadata(x, y, z)
         return when(meta) {
             META_BRONZE_MACHINE_CASING -> CompatTextures.CASE_MACHINE_BRONZE.icon
-            META_BRONZE_FIREBOX_CASING -> {
-                if (side >= 2) {
-                    val tile = world.getTileEntity(x, y, z)
-                    if (tile is IBlockActive && tile.isActive()) CompatTextures.CASE_FIREBOX_BRONZE_ACTIVE.icon
-                    else CompatTextures.CASE_FIREBOX_BRONZE.icon
-                } else CompatTextures.CASE_MACHINE_BRONZE.icon
+            META_BRONZE_BRICK_CASING -> when (side) {
+                0 -> CompatTextures.CASE_VANILA_BRICK.icon
+                1 -> CompatTextures.CASE_MACHINE_BRONZE.icon
+                else -> CompatTextures.CASE_BRONZE_BRICK.icon
             }
+
+            META_BRONZE_FIREBOX_CASING -> if (side >= 2) {
+                val tile = world.getTileEntity(x, y, z)
+                if (tile is IBlockActive && tile.isActive()) CompatTextures.CASE_FIREBOX_BRONZE_ACTIVE.icon
+                else CompatTextures.CASE_FIREBOX_BRONZE.icon
+            } else CompatTextures.CASE_MACHINE_BRONZE.icon
             else -> null
         }
     }

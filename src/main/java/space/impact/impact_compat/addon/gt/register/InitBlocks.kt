@@ -19,7 +19,9 @@ private fun initBlockModels() {
 }
 
 private fun initStructureBlocks() {
-    CompatBlocks.BRONZE_MACHINE_CASING.set(SteamAgeBlocks.INSTANCE.register(SteamAgeBlocks.META_BRONZE_MACHINE_CASING))
-    CompatBlocks.BRONZE_FIREBOX_CASING.set(SteamAgeBlocks.INSTANCE.register(SteamAgeBlocks.META_BRONZE_FIREBOX_CASING))
-    CompatBlocks.BRONZE_GLASS_CASING.set(SteamAgeGlassBlocks.INSTANCE.register(SteamAgeGlassBlocks.META_BRONZE_GLASS_MACHINE_CASING))
+    CompatBlocks.BRONZE_MACHINE_CASING.set(SteamAgeBlocks.INSTANCE.register(CompatBlocks.BRONZE_MACHINE_CASING.meta))
+    CompatBlocks.BRONZE_FIREBOX_CASING.set(SteamAgeBlocks.INSTANCE.register(CompatBlocks.BRONZE_FIREBOX_CASING.meta))
+    CompatBlocks.BRONZE_BRICK_CASING.set(SteamAgeBlocks.INSTANCE.register(CompatBlocks.BRONZE_BRICK_CASING.meta))
+
+    CompatBlocks.BRONZE_GLASS_CASING.set(SteamAgeGlassBlocks.INSTANCE.register(CompatBlocks.BRONZE_GLASS_CASING.meta))
 }

@@ -7,5 +7,21 @@
         "stream": false
       }
     ]
+  }, "machine.ore_washer": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "ore_washer",
+        "stream": false
+      }
+    ]
+  }, "machine.furnace": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "furnace",
+        "stream": false
+      }
+    ]
   }
 }

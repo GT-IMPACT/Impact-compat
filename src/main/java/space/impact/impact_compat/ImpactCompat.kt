@@ -7,8 +7,7 @@ import cpw.mods.fml.common.SidedProxy
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
-import space.impact.impact_compat.addon.gt.util.textures.initTexturePage2
+import space.impact.impact_compat.addon.gt.GTAddon
 import space.impact.impact_compat.common.network.Network
 import space.impact.impact_compat.core.Config
 import space.impact.impact_compat.core.InitSide
@@ -26,8 +25,7 @@ object ImpactCompat {
 
     init {
         Network.registerPackets()
-        CompatTextures.values()
-        initTexturePage2()
+        GTAddon.initWithMod()
     }
 
     @SidedProxy(

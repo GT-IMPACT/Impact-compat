@@ -24,7 +24,7 @@ import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlo
 import space.impact.impact_compat.addon.gt.features.steam_age.recipes.STEAM_CRUSHER_RECIPE_MAP
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
-import space.impact.impact_compat.addon.gt.util.textures.HATCH_INDEX_MACHINE_CASE_BRONZE
+import space.impact.impact_compat.addon.gt.util.textures.HatchTexture
 import space.impact.impact_compat.addon.gt.util.textures.factory
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addInputBusCount
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputBusCount
@@ -51,16 +51,16 @@ class MultiSteamKineticCrusher : KineticMultiBlockBase<MultiSteamKineticCrusher>
             .addElement('A', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticCrusher::class.java)
                     .atLeast(GT_HatchElement.InputBus, GT_HatchElement.OutputBus)
-                    .casingIndex(HATCH_INDEX_MACHINE_CASE_BRONZE)
+                    .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(1)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, SteamAgeBlocks.META_BRONZE_MACHINE_CASING)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
             })
             .addElement('B', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticCrusher::class.java)
                     .atLeast(CompatHatchElement.RotorHatch)
-                    .casingIndex(HATCH_INDEX_MACHINE_CASE_BRONZE)
+                    .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, SteamAgeBlocks.META_BRONZE_MACHINE_CASING)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
             })
             .build()
         private val OFFSET_STRUCTURE = Vec3(1, 4, 0)
@@ -71,7 +71,7 @@ class MultiSteamKineticCrusher : KineticMultiBlockBase<MultiSteamKineticCrusher>
     override fun newMetaEntity(te: IGregTechTileEntity): IMetaTileEntity = MultiSteamKineticCrusher(mName)
 
     override fun createTooltip(): GT_Multiblock_Tooltip_Builder {
-        return GT_Multiblock_Tooltip_Builder() //TODO
+        return GT_Multiblock_Tooltip_Builder()
             .addMachineType("Crusher")
             .beginStructureBlock(3, 5, 3, true)
             .addSteamMachineStructure(37..40)
@@ -111,6 +111,5 @@ class MultiSteamKineticCrusher : KineticMultiBlockBase<MultiSteamKineticCrusher>
     override fun getStructureDefinition(): IStructureDefinition<MultiSteamKineticCrusher>? = STRUCTURE
 
     @SideOnly(Side.CLIENT)
-    override fun getActivitySoundLoop(): ResourceLocation = SoundResource.IC2_MACHINES_MACERATOR_OP.resourceLocation
-    override fun getTimeBetweenProcessSounds(): Int = 10
+    override fun activeSound(): ResourceLocation = SoundResource.IC2_MACHINES_MACERATOR_OP.resourceLocation
 }

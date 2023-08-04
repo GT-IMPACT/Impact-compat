@@ -6,6 +6,8 @@ import space.impact.impact_compat.MODID
 enum class SoundRes {
 
     FORGE_HAMMER(0, MODID, "machine.forge_hammer"),
+    ORE_WASHER(1, MODID, "machine.ore_washer"),
+    FURNACE(2, MODID, "machine.furnace"),
     ;
 
     val id: Int

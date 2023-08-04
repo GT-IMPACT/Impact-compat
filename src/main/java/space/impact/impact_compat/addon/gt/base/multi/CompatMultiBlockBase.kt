@@ -1,9 +1,12 @@
 package space.impact.impact_compat.addon.gt.base.multi
 
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment
+import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_EnhancedMultiBlockBase
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ResourceLocation
 import space.impact.impact_compat.common.util.world.Vec3
 import space.impact.impact_compat.core.Config
 
@@ -70,4 +73,13 @@ abstract class CompatMultiBlockBase<T> : GT_MetaTileEntity_EnhancedMultiBlockBas
     ): Int {
         return survivialBuildPiece(piece, trigger, offset.x, offset.y, offset.z, elementsBudget, env, check, checkIfPlaced)
     }
+
+    override fun getTimeBetweenProcessSounds(): Int = 10
+
+    @SideOnly(Side.CLIENT)
+    final override fun getActivitySoundLoop(): ResourceLocation? =
+        if (Config.isEnabledLowPerformance) null else activeSound()
+
+    @SideOnly(Side.CLIENT)
+    open fun activeSound(): ResourceLocation? = null
 }

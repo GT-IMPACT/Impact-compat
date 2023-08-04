@@ -8,5 +8,6 @@ tile.steam_rotor.name=Бронзовая Паровая Кинетическая
 
 tile.compat.steam_age.block.0.name=Бронзовый Корпус Машины
 tile.compat.steam_age.block.1.name=Бронзовый Корпус Топки
+tile.compat.steam_age.block.2.name=Бронзово-кирпичный Корпус
 
 tile.compat.steam_age.glass.0.name=Бронзовое Стекло

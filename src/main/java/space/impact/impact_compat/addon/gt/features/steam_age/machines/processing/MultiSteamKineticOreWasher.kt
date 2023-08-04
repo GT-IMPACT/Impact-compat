@@ -55,33 +55,32 @@ class MultiSteamKineticOreWasher : KineticMultiBlockBase<MultiSteamKineticOreWas
                     arrayOf(" DBD ", "BBBBB", "BBABB"),
                 )
             )
-            .addElement('B', ofBlock(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta))
+            .addElement('B', ofBlock(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta))
             .addElement('A', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticOreWasher::class.java)
                     .atLeast(CompatHatchElement.RotorHatch)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)
             })
             .addElement('C', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticOreWasher::class.java)
                     .atLeast(GT_HatchElement.OutputBus, GT_HatchElement.OutputHatch)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)
             })
             .addElement('D', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticOreWasher::class.java)
                     .atLeast(GT_HatchElement.InputBus, GT_HatchElement.InputHatch)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)
             })
 
             .addElement('E', lazy { _ -> ofBlockAnyMeta(Blocks.water) })
             .build()
         private val OFFSET_STRUCTURE = Vec3(2, 2, 0)
-        private val OFFSET_WATER = Vec3(0, 2, -5)
     }
 
     constructor(id: Int) : super(id, LOCAL, UN_LOCAL, false)
@@ -110,8 +109,8 @@ class MultiSteamKineticOreWasher : KineticMultiBlockBase<MultiSteamKineticOreWas
         val base = CompatTextures.CASE_MACHINE_BRONZE.factory()
         if (side == facing) return arrayOf(
             base,
-            if (active) BlockIcons.OVERLAY_FRONT_STEAM_COMPRESSOR_ACTIVE.factory() // TODO
-            else BlockIcons.OVERLAY_FRONT_STEAM_COMPRESSOR.factory(), // TODO
+            if (active) CompatTextures.OVERLAY_WASHER_ACTIVE.factory()
+            else CompatTextures.OVERLAY_WASHER.factory(),
         )
         return arrayOf(base)
     }

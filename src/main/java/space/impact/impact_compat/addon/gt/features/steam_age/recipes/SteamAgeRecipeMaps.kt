@@ -42,3 +42,17 @@ val STEAM_ORE_WASHER_RECIPE_MAP = GT_Recipe.GT_Recipe_Map(
     1, 1, 0, 0, 1,
     EMPTY, 0, EMPTY, false, true
 )
+
+val STEAM_CENTRIFUGE_RECIPE_MAP = GT_Recipe.GT_Recipe_Map(
+    HashSet(10), "impact.recipe.steam.centrifuge", "Steam Bronze Centrifuge",
+    null, Mods.GregTech.getResourcePath(TEXTURES_GUI_BASIC_MACHINES, DEFAULT_TEXTURE),
+    1, 1, 0, 0, 1,
+    EMPTY, 0, EMPTY, false, true
+)
+
+val STEAM_SIFTER_RECIPE_MAP = GT_Recipe.GT_Recipe_Map(
+    HashSet(10), "impact.recipe.steam.sifter", "Steam Bronze Sifting Machine",
+    null, Mods.GregTech.getResourcePath(TEXTURES_GUI_BASIC_MACHINES, DEFAULT_TEXTURE),
+    1, 1, 0, 0, 1,
+    EMPTY, 0, EMPTY, false, true
+)

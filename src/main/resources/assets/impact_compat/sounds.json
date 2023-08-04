@@ -23,5 +23,13 @@
         "stream": false
       }
     ]
+  }, "machine.sifter": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "sifter",
+        "stream": false
+      }
+    ]
   }
 }

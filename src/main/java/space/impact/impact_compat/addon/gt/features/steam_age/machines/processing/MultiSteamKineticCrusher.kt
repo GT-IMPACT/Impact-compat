@@ -20,7 +20,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.base.multi.KineticMultiBlockBase
-import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlocks
 import space.impact.impact_compat.addon.gt.features.steam_age.recipes.STEAM_CRUSHER_RECIPE_MAP
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
@@ -53,14 +52,14 @@ class MultiSteamKineticCrusher : KineticMultiBlockBase<MultiSteamKineticCrusher>
                     .atLeast(GT_HatchElement.InputBus, GT_HatchElement.OutputBus)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(1)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)
             })
             .addElement('B', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticCrusher::class.java)
                     .atLeast(CompatHatchElement.RotorHatch)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
-                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_FIREBOX_CASING.meta)
+                    .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)
             })
             .build()
         private val OFFSET_STRUCTURE = Vec3(1, 4, 0)

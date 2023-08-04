@@ -13,7 +13,6 @@ enum class CompatMultis : CompatBaseItemContainer {
     STEAM_KINETIC_FURNACE,
     STEAM_KINETIC_SIFTER,
     STEAM_KINETIC_ORE_WASHER,
-    STEAM_KINETIC_MIXER,
     ;
 
     override var mHasNotBeenSet: Boolean = false

@@ -8,4 +8,6 @@ fun initSteamAgeRecipes() {
     addSteamAgeCompressorRecipes()
     addSteamAgeExtractorRecipes()
     addSteamAgeOreWasherRecipes()
+    addSteamAgeCentrifugeRecipes()
+    addSteamAgeSifterRecipes()
 }

@@ -23,7 +23,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.base.multi.CompatMultiBlockBase
-import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlocks
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
 import space.impact.impact_compat.addon.gt.util.textures.HatchTexture

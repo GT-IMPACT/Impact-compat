@@ -8,6 +8,7 @@ enum class SoundRes {
     FORGE_HAMMER(0, MODID, "machine.forge_hammer"),
     ORE_WASHER(1, MODID, "machine.ore_washer"),
     FURNACE(2, MODID, "machine.furnace"),
+    SIFTER(3, MODID, "machine.sifter"),
     ;
 
     val id: Int

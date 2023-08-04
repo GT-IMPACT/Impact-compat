@@ -15,10 +15,8 @@ fun initMultis() {
     CompatMultis.STEAM_KINETIC_EXTRACTOR.set(MultiSteamKineticExtractor(offsetId++).getStackForm(1))
     CompatMultis.STEAM_KINETIC_ORE_WASHER.set(MultiSteamKineticOreWasher(offsetId++).getStackForm(1))
     CompatMultis.STEAM_KINETIC_FURNACE.set(MultiSteamFurnace(offsetId++).getStackForm(1))
-//    CompatMultis.STEAM_KINETIC_CENTRIFUGE.set((offsetId++).getStackForm(1))
-//    CompatMultis.STEAM_KINETIC_SIFTER.set((offsetId++).getStackForm(1))
-//    CompatMultis.STEAM_KINETIC_MIXER.set((offsetId++).getStackForm(1))
-
+    CompatMultis.STEAM_KINETIC_CENTRIFUGE.set(MultiSteamKineticCentrifuge(offsetId++).getStackForm(1))
+    CompatMultis.STEAM_KINETIC_SIFTER.set(MultiSteamKineticSifter(offsetId++).getStackForm(1))
 
     CLog.i("Finish Registered Multis. Last ID = $offsetId")
 }

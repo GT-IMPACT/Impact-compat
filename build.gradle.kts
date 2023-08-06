@@ -32,7 +32,7 @@ buildConfig {
 dependencies {
     api("com.github.GTNewHorizons:ModularUI:1.1.10:dev")
     api("space.impact:packet_network:1.1.+:dev")
-    api("space.impact:GT5-Unofficial:5.09.44.0:dev") {
+    api("space.impact:GT5-Unofficial:5.09.44.3:dev") {
         exclude("com.github.GTNewHorizons", "waila")
     }
     implementation(fileTree(mapOf("dir" to "libs/", "include" to listOf("*.jar"))))

@@ -15,9 +15,7 @@ public enum CompatHatchElement implements IHatchElement<KineticMultiBlockBase<?>
 	RotorHatch(KineticMultiBlockBase::addKineticHatch, SteamRotorHatch.class) {
 		@Override
 		public long count(KineticMultiBlockBase<?> t) {return t.mInputHatches.size();}
-	},
-	
-	;
+	};
 	
 	private final List<Class<? extends IMetaTileEntity>> mteClasses;
 	private final IGT_HatchAdder<KineticMultiBlockBase<?>> adder;

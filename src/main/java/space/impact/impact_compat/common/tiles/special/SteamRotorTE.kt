@@ -30,9 +30,9 @@ class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, I
         private const val WORK_SPEED4 = "work.speed.4"
         private const val WORK_SPEED2 = "work.speed.2"
         private const val WORK_SPEED1 = "work.speed.1"
-        private const val LOW_BOUND = 400
-        private const val MEDIUM_BOUND = 800
-        private const val HIGH_BOUND = 2400
+        const val LOW_BOUND = 400
+        const val MEDIUM_BOUND = 800
+        const val HIGH_BOUND = 2400
         private const val ZERO = 0
         private const val CAPACITY = 10_000
         private const val STEAM_FLUID = "steam"

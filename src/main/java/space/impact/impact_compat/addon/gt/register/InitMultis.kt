@@ -3,6 +3,7 @@ package space.impact.impact_compat.addon.gt.register
 import space.impact.impact_compat.addon.gt.GTAddon
 import space.impact.impact_compat.addon.gt.features.steam_age.machines.generation.MultiSteamBoiler
 import space.impact.impact_compat.addon.gt.features.steam_age.machines.processing.*
+import space.impact.impact_compat.addon.gt.features.steam_age.machines.pump.MultiSteamKineticWaterPump
 import space.impact.impact_compat.addon.gt.items.CompatMultis
 import space.impact.impact_compat.core.CLog
 
@@ -17,6 +18,7 @@ fun initMultis() {
     CompatMultis.STEAM_KINETIC_FURNACE.set(MultiSteamFurnace(offsetId++).getStackForm(1))
     CompatMultis.STEAM_KINETIC_CENTRIFUGE.set(MultiSteamKineticCentrifuge(offsetId++).getStackForm(1))
     CompatMultis.STEAM_KINETIC_SIFTER.set(MultiSteamKineticSifter(offsetId++).getStackForm(1))
+    CompatMultis.STEAM_KINETIC_WATER_PUMP.set(MultiSteamKineticWaterPump(offsetId++).getStackForm(1))
 
     CLog.i("Finish Registered Multis. Last ID = $offsetId")
 }

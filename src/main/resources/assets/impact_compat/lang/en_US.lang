@@ -5,9 +5,14 @@ steam.rotor.stop=Not Working
 steam.rotor.speed=Speed
 
 tile.steam_rotor.name=Bronze Steam Kinetic Turbine
+impact.tt.steam.rotor.0=Low speed need Steam %s L/s
+impact.tt.steam.rotor.1=Medium speed need Steam %s L/s
+impact.tt.steam.rotor.2=High speed need Steam %s L/s
 
 tile.compat.steam_age.block.0.name=Bronze Machine Casing
 tile.compat.steam_age.block.1.name=Bronze Firebox Casing
 tile.compat.steam_age.block.2.name=Bronze Brick Casing
 
 tile.compat.steam_age.glass.0.name=Bronze Glass
+
+waila.underwater_hatch_problem=Detect Problem: Underwater Part

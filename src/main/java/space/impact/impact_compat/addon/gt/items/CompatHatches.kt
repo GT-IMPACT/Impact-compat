@@ -6,6 +6,7 @@ enum class CompatHatches : CompatBaseItemContainer {
 
     PRIMITIVE_WHEAL_ROTOR,
     STEAM_ROTOR_HATCH,
+    UNDERWATER_PUMP_HATCH,
     ;
 
     override var mHasNotBeenSet: Boolean = false

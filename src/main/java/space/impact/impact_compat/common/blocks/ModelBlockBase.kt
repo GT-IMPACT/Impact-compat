@@ -1,3 +1,5 @@
+@file:Suppress("LeakingThis")
+
 package space.impact.impact_compat.common.blocks
 
 import cpw.mods.fml.common.registry.GameRegistry
@@ -12,6 +14,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.IIcon
@@ -24,6 +27,7 @@ import space.impact.impact_compat.common.tiles.BaseCompatTileEntity
 abstract class ModelBlockBase(
     private val blockName: String,
     material: Material,
+    item: Class<out ItemBlock> = GeoItemBlock::class.java
 ) : Block(material) {
 
     companion object {
@@ -35,7 +39,7 @@ abstract class ModelBlockBase(
         super.setHarvestLevel(WRENCH, 1)
         setHardness(5.0f)
         setResistance(6.0f)
-        GameRegistry.registerBlock(this, GeoItemBlock::class.java, blockName)
+        GameRegistry.registerBlock(this, item, blockName)
     }
 
     @SideOnly(Side.CLIENT)

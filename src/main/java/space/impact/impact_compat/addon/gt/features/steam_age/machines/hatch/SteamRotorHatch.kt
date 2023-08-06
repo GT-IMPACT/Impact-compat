@@ -1,6 +1,5 @@
 package space.impact.impact_compat.addon.gt.features.steam_age.machines.hatch
 
-import gregtech.api.enums.Textures
 import gregtech.api.interfaces.ITexture
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
 import gregtech.api.metatileentity.MetaTileEntity
@@ -42,11 +41,11 @@ class SteamRotorHatch : GT_MetaTileEntity_Hatch, IKinetic {
     }
 
     override fun getTexturesActive(aBaseTexture: ITexture): Array<ITexture> {
-        return arrayOf(aBaseTexture, Textures.BlockIcons.OVERLAY_ME_INPUT_HATCH_ACTIVE.factory())
+        return arrayOf(aBaseTexture, CompatTextures.OVERLAY_ROTOR_HATCH.factory())
     }
 
     override fun getTexturesInactive(aBaseTexture: ITexture): Array<ITexture> {
-        return arrayOf(aBaseTexture, Textures.BlockIcons.OVERLAY_ME_INPUT_HATCH.factory())
+        return arrayOf(aBaseTexture, CompatTextures.OVERLAY_ROTOR_HATCH.factory())
     }
 
     override fun getTexture(

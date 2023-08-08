@@ -29,7 +29,7 @@ import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addInputBusCo
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputBusCount
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addRotorHatch
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addSteamMachineStructure
-import space.impact.impact_compat.addon.gt.util.world.CompatHatchElement
+import space.impact.impact_compat.addon.gt.util.world.KineticHatchElement
 import space.impact.impact_compat.addon.gt.util.world.GTParticles
 import space.impact.impact_compat.addon.gt.util.world.checkCountHatches
 import space.impact.impact_compat.common.util.merch.Tags
@@ -52,7 +52,7 @@ class MultiSteamKineticForgeHammer : KineticMultiBlockBase<MultiSteamKineticForg
             })
             .addElement('B', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticForgeHammer::class.java)
-                    .atLeast(CompatHatchElement.RotorHatch)
+                    .atLeast(KineticHatchElement.RotorHatch)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(1)
                     .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)

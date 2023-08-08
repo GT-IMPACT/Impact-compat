@@ -15,7 +15,7 @@ interface CompatBaseItemContainer : IItemContainer {
     var mHasNotBeenSet: Boolean
     val nameItem: String
 
-    override fun set(aItem: Item?): IItemContainer {
+    override infix fun set(aItem: Item?): IItemContainer {
         mHasNotBeenSet = false
         if (aItem == null) return this
         val aStack = ItemStack(aItem, 1, 0)
@@ -23,7 +23,7 @@ interface CompatBaseItemContainer : IItemContainer {
         return this
     }
 
-    fun set(aItem: Block?): IItemContainer {
+    infix fun set(aItem: Block?): IItemContainer {
         mHasNotBeenSet = false
         if (aItem == null) return this
         val aStack = ItemStack(aItem, 1, 0)
@@ -31,7 +31,7 @@ interface CompatBaseItemContainer : IItemContainer {
         return this
     }
 
-    override fun set(aStack: ItemStack?): IItemContainer {
+    override infix fun set(aStack: ItemStack?): IItemContainer {
         mHasNotBeenSet = false
         mStack = GT_Utility.copyAmount(1, aStack)
         return this

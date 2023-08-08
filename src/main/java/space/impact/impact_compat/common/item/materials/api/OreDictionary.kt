@@ -1,6 +1,9 @@
 @file:Suppress("EnumEntryName")
 
-package space.impact.impact_compat.common.item.materials
+package space.impact.impact_compat.common.item.materials.api
+
+import space.impact.impact_compat.common.item.materials.GeneratedMaterials
+import space.impact.impact_compat.common.item.materials.texture.TextureType
 
 enum class OreDictionary(
     val regularName: String,
@@ -10,6 +13,7 @@ enum class OreDictionary(
     val textureDefault: TextureType,
 ) {
 
+    crushed("Crushed", "", " Ore", 64, TextureType.CRUSHED_ORE),
     ingot("Ingots", "", " Ingot", 64, TextureType.INGOT),
     plate("Plate", "", " Plate", 32, TextureType.PLATE),
     ;

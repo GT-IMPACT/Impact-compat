@@ -42,9 +42,9 @@ enum class KineticSpeed(val speed: Int) {
 
     companion object {
         fun typeOf(speed: Int) = when(speed) {
-            4 -> HIGH
-            2 -> MEDIUM
-            1 -> LOW
+            HIGH.speed -> HIGH
+            MEDIUM.speed -> MEDIUM
+            LOW.speed -> LOW
             else -> STOP
         }
 

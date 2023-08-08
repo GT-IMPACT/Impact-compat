@@ -1,8 +1,6 @@
-package space.impact.impact_compat.common.tiles
+package space.impact.impact_compat.common.tiles.base
 
-import gregtech.api.enums.GT_Values
 import gregtech.api.interfaces.tileentity.IGregtechWailaProvider
-import gregtech.api.net.GT_Packet_Block_Event
 import mcp.mobius.waila.api.IWailaConfigHandler
 import mcp.mobius.waila.api.IWailaDataAccessor
 import net.minecraft.block.Block
@@ -16,11 +14,11 @@ import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.common.network.Network.PacketChangeSide
 import space.impact.impact_compat.common.network.Network.PacketStartBaseTile
+import space.impact.impact_compat.core.NBT
 import space.impact.impact_compat.core.WorldAround
 import space.impact.impact_compat.core.WorldTick
 import space.impact.impact_compat.core.WorldTick.of
 import space.impact.packet_network.network.NetworkHandler.sendToAllAround
-import space.impact.packet_network.network.NetworkHandler.sendToServer
 
 abstract class BaseCompatTileEntity : TileEntity(), IGregtechWailaProvider, IModelTile {
 
@@ -43,7 +41,6 @@ abstract class BaseCompatTileEntity : TileEntity(), IGregtechWailaProvider, IMod
     override fun setActive(isActive: Boolean) {
         this.isActive = isActive
         if (isServerSide()) sendToAllAround(PacketStartBaseTile.transaction(isActive), WorldAround.CHUNK_4)
-        else sendToServer(PacketStartBaseTile.transaction(isActive))
     }
 
     override fun getFrontFacing(): ForgeDirection {
@@ -92,7 +89,7 @@ abstract class BaseCompatTileEntity : TileEntity(), IGregtechWailaProvider, IMod
         if (isServerSide()) {
             if (ticker == 1L) onFirstTick()
             if (ticker of WorldTick.SECOND_HALF) sendClientData()
-            if (ticker of WorldTick.SECOND_3)  issueClientUpdate() //TODO Костыль, надо пофиксить
+            if (ticker of WorldTick.SECOND_3) issueClientUpdate() //TODO Костыль, надо пофиксить
             if (mFacing != oFacing) {
                 oFacing = mFacing
                 updateNeighbours()
@@ -134,14 +131,14 @@ abstract class BaseCompatTileEntity : TileEntity(), IGregtechWailaProvider, IMod
 
     override fun writeToNBT(data: NBTTagCompound) {
         super.writeToNBT(data)
-        data.setInteger("mFacing", mFacing.ordinal)
-        data.setBoolean("isActive", isActive)
+        data.setInteger(NBT.NBT_FACING, mFacing.ordinal)
+        data.setBoolean(NBT.NBT_ACTIVE, isActive)
     }
 
     override fun readFromNBT(data: NBTTagCompound) {
         super.readFromNBT(data)
-        mFacing = ForgeDirection.getOrientation(data.getInteger("mFacing")).also { oFacing = it }
-        isActive = data.getBoolean("isActive")
+        mFacing = ForgeDirection.getOrientation(data.getInteger(NBT.NBT_FACING)).also { oFacing = it }
+        isActive = data.getBoolean(NBT.NBT_ACTIVE)
     }
 
     fun getTileEntity(aX: Int, aY: Int, aZ: Int): TileEntity? {

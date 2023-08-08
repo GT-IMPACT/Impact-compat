@@ -1,5 +1,9 @@
-package space.impact.impact_compat.common.tiles
+@file:Suppress("LeakingThis", "unused")
 
+package space.impact.impact_compat.common.tiles.base
+
+import net.minecraft.block.Block
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import software.bernie.geckolib3.core.IAnimatable
 import software.bernie.geckolib3.core.PlayState
@@ -9,10 +13,11 @@ import software.bernie.geckolib3.core.controller.AnimationController
 import software.bernie.geckolib3.core.manager.AnimationData
 import software.bernie.geckolib3.core.manager.AnimationFactory
 import software.bernie.geckolib3.util.GeckoLibUtil
+import space.impact.impact_compat.common.util.forge.RegisterUtil
 import space.impact.impact_compat.core.Config
 import space.impact.impact_compat.core.NBT
 
-abstract class BaseTileEntityModel : BaseCompatTileEntity(), IAnimatable {
+abstract class BaseTileEntityModel : BaseCompatTileEntity, IAnimatable {
 
     companion object {
         const val CONTROLLER = "controller"
@@ -27,6 +32,15 @@ abstract class BaseTileEntityModel : BaseCompatTileEntity(), IAnimatable {
     var isAnimated: Boolean = false
     var isWork: Boolean = false
 
+    constructor(name: String) {
+        RegisterUtil.registerTE(this::class.java, name)
+    }
+
+    constructor() : super()
+
+    fun getStackForm(block: Block, amount: Int = 1, meta: Int = 0): ItemStack {
+        return ItemStack(block, amount, meta)
+    }
 
     private val factory = GeckoLibUtil.createFactory(this)
     final override fun getFactory(): AnimationFactory = factory

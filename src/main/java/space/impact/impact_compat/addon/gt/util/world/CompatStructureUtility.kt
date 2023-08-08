@@ -12,9 +12,7 @@ import gregtech.api.metatileentity.implementations.GT_MetaPipeEntity_Fluid
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IChatComponent
-import net.minecraft.util.IIcon
 import net.minecraft.world.World
-import java.util.*
 import java.util.function.Consumer
 
 object CompatStructureUtility {

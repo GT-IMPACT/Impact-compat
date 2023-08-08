@@ -6,4 +6,5 @@ object NBT {
     const val NBT_BLOCKS_COUNT = "NBT_BLOCKS_COUNT"
     const val NBT_SPEED = "NBT_SPEED"
     const val NBT_BURN = "NBT_BURN"
+    const val NBT_FACING = "NBT_FACING"
 }

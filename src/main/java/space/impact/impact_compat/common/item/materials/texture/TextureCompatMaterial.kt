@@ -1,7 +1,8 @@
-package space.impact.impact_compat.common.item.materials
+package space.impact.impact_compat.common.item.materials.texture
 
 import gregtech.api.interfaces.IIconContainer
 import space.impact.impact_compat.addon.gt.util.textures.CustomTextures
+import space.impact.impact_compat.common.item.materials.api.OreDictionary
 
 class TextureCompatMaterial(
     prefix: String,
@@ -36,6 +37,7 @@ class TextureCompatMaterial(
 
 
 enum class TextureType {
+    CRUSHED_ORE,
     INGOT,
     PLATE,
     VOID;

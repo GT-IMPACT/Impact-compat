@@ -10,6 +10,7 @@ enum class HatchTexture(page: Int, val index: Int, texture: ITexture?) {
 
     MACHINE_CAGE_BRONZE(PAGE_2, 256, CompatTextures.CASE_MACHINE_BRONZE.factory()),
     MACHINE_CASE_BRONZE_BRICK(PAGE_2, 257, CompatTextures.CASE_BRONZE_BRICK.factory()),
+    MACHINE_CASE_PRIMITIVE_BRICK(PAGE_2, 258, CompatTextures.CASE_PRIMITIVE_SMELTER.factory()),
     UNKNOWN(0, 0, null);
 
     init {

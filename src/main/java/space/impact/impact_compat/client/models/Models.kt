@@ -24,5 +24,5 @@ sealed class Models<T : IAnimatable>(
     class WaterWhealModel<T : IAnimatable> : Models<T>("water_wheal", Vector3f(.5f, .5f, .5f))
     class WindWhealModel<T : IAnimatable> : Models<T>("wind_wheal", Vector3f(.25f, .25f, .25f))
     class SteamRotorModel<T : IAnimatable> : Models<T>("steam_rotor")
-
+    class SmelterContentModel<T : IAnimatable> : Models<T>("smelter_content", Vector3f(.25f, .25f, .25f))
 }

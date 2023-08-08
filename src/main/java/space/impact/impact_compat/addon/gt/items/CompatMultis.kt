@@ -14,6 +14,9 @@ enum class CompatMultis : CompatBaseItemContainer {
     STEAM_KINETIC_SIFTER,
     STEAM_KINETIC_ORE_WASHER,
     STEAM_KINETIC_WATER_PUMP,
+
+    PRIMITIVE_SMELTER,
+    PRIMITIVE_CASTER,
     ;
 
     override var mHasNotBeenSet: Boolean = false

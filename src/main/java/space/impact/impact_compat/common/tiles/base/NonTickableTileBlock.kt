@@ -1,14 +1,21 @@
-package space.impact.impact_compat.common.tiles
+package space.impact.impact_compat.common.tiles.base
 
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.Packet
 import net.minecraft.tileentity.TileEntity
 import space.impact.impact_compat.common.network.Network.PacketChangeActive
+import space.impact.impact_compat.common.util.forge.RegisterUtil
 import space.impact.impact_compat.core.NBT
 import space.impact.impact_compat.core.WorldAround
 import space.impact.packet_network.network.NetworkHandler.sendToAllAround
 
-class NonTickableTileBlock : TileEntity(), IBlockActive {
+class NonTickableTileBlock : TileEntity, IBlockActive {
+
+    constructor(name: String) {
+        RegisterUtil.registerTE(this::class.java, name)
+    }
+
+    constructor() : super()
 
     private var isActive: Boolean = false
 

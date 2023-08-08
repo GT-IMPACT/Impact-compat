@@ -1,4 +1,4 @@
-package space.impact.impact_compat.common.tiles
+package space.impact.impact_compat.common.tiles.base
 
 import net.minecraftforge.common.util.ForgeDirection
 

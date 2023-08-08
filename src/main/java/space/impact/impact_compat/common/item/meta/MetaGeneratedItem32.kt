@@ -12,11 +12,11 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IIcon
-import space.impact.impact_compat.common.item.materials.CompatMaterial
-import space.impact.impact_compat.common.item.materials.CompatMaterial.Companion.GENERATED_MATERIALS
-import space.impact.impact_compat.common.item.materials.CompatMaterial.Companion.MAX_MATERIALS
+import space.impact.impact_compat.common.item.materials.api.CompatMaterial
+import space.impact.impact_compat.common.item.materials.api.CompatMaterial.Companion.GENERATED_MATERIALS
+import space.impact.impact_compat.common.item.materials.api.CompatMaterial.Companion.MAX_MATERIALS
 import space.impact.impact_compat.common.item.materials.GeneratedMaterials
-import space.impact.impact_compat.common.item.materials.OreDictionary
+import space.impact.impact_compat.common.item.materials.api.OreDictionary
 import space.impact.impact_compat.core.Config
 import java.util.*
 import kotlin.math.min

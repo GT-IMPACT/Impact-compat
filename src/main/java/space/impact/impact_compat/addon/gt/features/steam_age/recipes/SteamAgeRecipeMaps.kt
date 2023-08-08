@@ -56,3 +56,17 @@ val STEAM_SIFTER_RECIPE_MAP = GT_Recipe.GT_Recipe_Map(
     1, 1, 0, 0, 1,
     EMPTY, 0, EMPTY, false, true
 )
+
+val PRIMITIVE_SMELTER_RECIPE_MAP = GT_Recipe.GT_Recipe_Map(
+    HashSet(10), "impact.recipe.primitive.smelter", "Primitive Smelter",
+    null, Mods.GregTech.getResourcePath(TEXTURES_GUI_BASIC_MACHINES, DEFAULT_TEXTURE),
+    3, 0, 1, 0, 1,
+    EMPTY, 0, EMPTY, false, true
+)
+
+val PRIMITIVE_CASTER_RECIPE_MAP = GT_Recipe.GT_Recipe_Map(
+    HashSet(10), "impact.recipe.primitive.caster", "Primitive Caster",
+    null, Mods.GregTech.getResourcePath(TEXTURES_GUI_BASIC_MACHINES, DEFAULT_TEXTURE),
+    1, 1, 0, 1, 1,
+    EMPTY, 0, EMPTY, false, true
+)

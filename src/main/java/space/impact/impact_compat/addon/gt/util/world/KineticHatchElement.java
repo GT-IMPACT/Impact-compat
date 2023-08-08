@@ -4,13 +4,13 @@ import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.util.IGT_HatchAdder;
 import space.impact.impact_compat.addon.gt.base.multi.KineticMultiBlockBase;
-import space.impact.impact_compat.addon.gt.features.steam_age.machines.hatch.SteamRotorHatch;
+import space.impact.impact_compat.addon.gt.features.steam_age.machines.processing.hatch.SteamRotorHatch;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public enum CompatHatchElement implements IHatchElement<KineticMultiBlockBase<?>> {
+public enum KineticHatchElement implements IHatchElement<KineticMultiBlockBase<?>> {
 	
 	RotorHatch(KineticMultiBlockBase::addKineticHatch, SteamRotorHatch.class) {
 		@Override
@@ -21,7 +21,7 @@ public enum CompatHatchElement implements IHatchElement<KineticMultiBlockBase<?>
 	private final IGT_HatchAdder<KineticMultiBlockBase<?>> adder;
 	
 	@SafeVarargs
-	CompatHatchElement(
+	KineticHatchElement(
 			IGT_HatchAdder<KineticMultiBlockBase<?>> adder,
 			Class<? extends IMetaTileEntity>... mteClasses
 	) {

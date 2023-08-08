@@ -1,4 +1,4 @@
-package space.impact.impact_compat.common.tiles.special
+package space.impact.impact_compat.common.tiles.models
 
 import mcp.mobius.waila.api.IWailaConfigHandler
 import mcp.mobius.waila.api.IWailaDataAccessor
@@ -17,14 +17,14 @@ import software.bernie.geckolib3.core.manager.AnimationData
 import space.impact.impact_compat.addon.gt.features.steam_age.api.IKinetic
 import space.impact.impact_compat.addon.gt.features.steam_age.api.KineticSpeed
 import space.impact.impact_compat.common.network.Network
-import space.impact.impact_compat.common.tiles.BaseTileRotationEntityModel
+import space.impact.impact_compat.common.tiles.base.BaseTileRotationEntityModel
 import space.impact.impact_compat.core.NBT
 import space.impact.impact_compat.core.WorldAround
 import space.impact.impact_compat.core.WorldTick
 import space.impact.impact_compat.core.WorldTick.of
 import space.impact.packet_network.network.NetworkHandler.sendToAllAround
 
-class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, IKinetic {
+class SteamRotorModelTile : BaseTileRotationEntityModel, IFluidTank, IFluidHandler, IKinetic {
 
     companion object {
         private const val WORK_SPEED4 = "work.speed.4"
@@ -37,6 +37,9 @@ class SteamRotorTE : BaseTileRotationEntityModel(), IFluidTank, IFluidHandler, I
         private const val CAPACITY = 10_000
         private const val STEAM_FLUID = "steam"
     }
+
+    constructor(name: String) : super(name)
+    constructor() : super()
 
     private var mFluid: FluidStack? = null
     private var speed: KineticSpeed = KineticSpeed.STOP

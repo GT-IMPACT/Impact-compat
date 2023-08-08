@@ -15,11 +15,11 @@ import software.bernie.geckolib3.renderers.geo.GeoItemRenderer
 import software.bernie.geckolib3.util.MatrixStack
 import space.impact.impact_compat.client.interfaces.IRenderedModel
 import space.impact.impact_compat.client.models.Models
-import space.impact.impact_compat.common.tiles.BaseCompatTileEntity
+import space.impact.impact_compat.common.tiles.base.BaseCompatTileEntity
 
 @Suppress("UNCHECKED_CAST")
 @SideOnly(Side.CLIENT)
-class BlockRenderCompat<T>(provider: AnimatedGeoModel<T>) : GeoBlockRenderer<T>(provider) where T : TileEntity, T : IAnimatable {
+class BlockRenderCompat<T>(provider: Models<T>) : GeoBlockRenderer<T>(provider) where T : TileEntity, T : IAnimatable {
     override fun renderEarly(animatable: T, poseStack: MatrixStack, partialTick: Float, red: Float, green: Float, blue: Float, alpha: Float) {
         if (animatable is BaseCompatTileEntity) {
             rotate(animatable.getFrontFacing().ordinal, poseStack)

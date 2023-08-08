@@ -1,4 +1,4 @@
-package space.impact.impact_compat.addon.gt.features.steam_age.machines.hatch
+package space.impact.impact_compat.addon.gt.features.steam_age.machines.processing.hatch
 
 import gregtech.api.interfaces.ITexture
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
@@ -31,7 +31,7 @@ class SteamRotorHatch : GT_MetaTileEntity_Hatch, IKinetic {
     private val store = KineticLogicStore(this)
 
     constructor(aID: Int, aNameRegional: String)
-            : super(aID, LOCAL_NAME, aNameRegional, 0, 4, arrayOf(Tags.IMPACT_GREGTECH, "Rotor Hatch for Multiblocks"))
+            : super(aID, LOCAL_NAME, aNameRegional, 0, 4, arrayOf("Rotor Hatch for Multiblocks", Tags.IMPACT_GREGTECH))
 
     constructor(aName: String, aTier: Int, aDescription: Array<String>, aTextures: Array<Array<Array<ITexture?>?>?>)
             : super(aName, aTier, 4, aDescription, aTextures)

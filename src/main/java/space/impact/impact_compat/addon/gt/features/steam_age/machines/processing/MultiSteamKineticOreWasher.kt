@@ -8,7 +8,6 @@ import com.gtnewhorizon.structurelib.structure.StructureUtility.*
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import gregtech.api.enums.GT_HatchElement
-import gregtech.api.enums.Textures.BlockIcons
 import gregtech.api.interfaces.ITexture
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
@@ -20,7 +19,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.base.multi.KineticMultiBlockBase
-import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlocks
 import space.impact.impact_compat.addon.gt.features.steam_age.recipes.STEAM_ORE_WASHER_RECIPE_MAP
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
@@ -32,7 +30,7 @@ import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputBusC
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputHatchCount
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addRotorHatch
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addSteamMachineStructure
-import space.impact.impact_compat.addon.gt.util.world.CompatHatchElement
+import space.impact.impact_compat.addon.gt.util.world.KineticHatchElement
 import space.impact.impact_compat.addon.gt.util.world.checkCountHatches
 import space.impact.impact_compat.common.util.merch.Tags
 import space.impact.impact_compat.common.util.sound.SoundRes
@@ -58,7 +56,7 @@ class MultiSteamKineticOreWasher : KineticMultiBlockBase<MultiSteamKineticOreWas
             .addElement('B', ofBlock(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta))
             .addElement('A', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticOreWasher::class.java)
-                    .atLeast(CompatHatchElement.RotorHatch)
+                    .atLeast(KineticHatchElement.RotorHatch)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
                     .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)

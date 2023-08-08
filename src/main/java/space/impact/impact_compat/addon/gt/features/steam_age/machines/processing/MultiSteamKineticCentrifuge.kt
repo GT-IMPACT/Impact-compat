@@ -28,7 +28,7 @@ import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addInputBusCo
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputBusCount
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addRotorHatch
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addSteamMachineStructure
-import space.impact.impact_compat.addon.gt.util.world.CompatHatchElement
+import space.impact.impact_compat.addon.gt.util.world.KineticHatchElement
 import space.impact.impact_compat.addon.gt.util.world.checkCountHatches
 import space.impact.impact_compat.common.util.merch.Tags
 import space.impact.impact_compat.common.util.world.Vec3
@@ -59,7 +59,7 @@ class MultiSteamKineticCentrifuge : KineticMultiBlockBase<MultiSteamKineticCentr
             .addElement('B', ofBlock(CompatBlocks.BRONZE_GLASS_CASING.block, CompatBlocks.BRONZE_GLASS_CASING.meta))
             .addElement('D', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticCentrifuge::class.java)
-                    .atLeast(CompatHatchElement.RotorHatch)
+                    .atLeast(KineticHatchElement.RotorHatch)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
                     .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)

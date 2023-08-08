@@ -30,7 +30,7 @@ import space.impact.impact_compat.addon.gt.util.textures.factory
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addSteamMachineStructure
 import space.impact.impact_compat.addon.gt.util.world.GTWorldUtil
 import space.impact.impact_compat.addon.gt.util.world.checkCountHatches
-import space.impact.impact_compat.common.tiles.NonTickableTileBlock
+import space.impact.impact_compat.common.tiles.base.NonTickableTileBlock
 import space.impact.impact_compat.common.util.merch.Tags
 import space.impact.impact_compat.common.util.world.Vec3
 import space.impact.impact_compat.core.Config

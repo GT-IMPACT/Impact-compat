@@ -1,4 +1,4 @@
-package space.impact.impact_compat.common.tiles
+package space.impact.impact_compat.common.tiles.base
 
 import software.bernie.geckolib3.core.PlayState
 import software.bernie.geckolib3.core.builder.AnimationBuilder
@@ -7,7 +7,7 @@ import software.bernie.geckolib3.core.controller.AnimationController
 import software.bernie.geckolib3.core.manager.AnimationData
 
 @Suppress("unused")
-abstract class BaseTileRotationEntityModel : BaseTileEntityModel() {
+open class BaseTileRotationEntityModel : BaseTileEntityModel {
 
     companion object {
         private const val WORK_R = "work.right"
@@ -19,6 +19,9 @@ abstract class BaseTileRotationEntityModel : BaseTileEntityModel() {
         private const val IDLE_L = "idle.left"
     }
 
+    constructor(name: String) : super(name)
+    constructor() : super()
+
     override fun animation(data: AnimationData) {
         data.addAnimationController(AnimationController(this, CONTROLLER, TICK) {
             if (isActive()) {
@@ -26,7 +29,6 @@ abstract class BaseTileRotationEntityModel : BaseTileEntityModel() {
                 PlayState.CONTINUE
             } else {
                 val builder = AnimationBuilder()
-//                if (!isFirst) builder.addAnimation(STOP_L, ILoopType.EDefaultLoopTypes.PLAY_ONCE)
                 it.controller.setAnimation(builder.addAnimation(IDLE_L, ILoopType.EDefaultLoopTypes.LOOP))
                 PlayState.CONTINUE
             }

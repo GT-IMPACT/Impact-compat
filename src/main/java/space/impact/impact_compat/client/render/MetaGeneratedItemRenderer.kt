@@ -14,6 +14,8 @@ import net.minecraftforge.client.IItemRenderer.ItemRenderType
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper
 import net.minecraftforge.client.MinecraftForgeClient
 import org.lwjgl.opengl.GL11
+import space.impact.impact_compat.addon.gt.items.CompatItems
+import space.impact.impact_compat.common.item.CompatItemsPagination
 import space.impact.impact_compat.common.item.meta.MetaGeneratedItem
 import space.impact.impact_compat.common.util.render.RenderUtil
 
@@ -23,6 +25,7 @@ class MetaGeneratedItemRenderer : IItemRenderer {
         for (item in MetaGeneratedItem.sInstances.values) {
             MinecraftForgeClient.registerItemRenderer(item, this)
         }
+        MinecraftForgeClient.registerItemRenderer(CompatItems.INSTANCE_PAGE1, this)
     }
 
     override fun handleRenderType(stack: ItemStack?, aType: ItemRenderType): Boolean {
@@ -39,7 +42,7 @@ class MetaGeneratedItemRenderer : IItemRenderer {
         val meta = stack.itemDamage
         if (meta < 0) return
 
-        val aItem = stack.item as MetaGeneratedItem
+        val aItem = stack.item
         GL11.glEnable(GL11.GL_BLEND)
 
         if (type == ItemRenderType.ENTITY) {
@@ -54,7 +57,7 @@ class MetaGeneratedItemRenderer : IItemRenderer {
         GL11.glColor3f(1.0f, 1.0f, 1.0f)
 
 
-        if (meta < aItem.mOffset) {
+        if (aItem is  MetaGeneratedItem && meta < aItem.mOffset) {
             val aIcon = aItem.getIconContainer(meta)
             var tOverlay: IIcon? = null
             var fluidIcon: IIcon? = null
@@ -100,11 +103,13 @@ class MetaGeneratedItemRenderer : IItemRenderer {
             if (tOverlay != null) {
                 bindTexture(type, tOverlay)
             }
-        } else {
-            val tIcon: IIcon? = if (aItem.mIconList[meta - aItem.mOffset].size > 1) {
-                aItem.mIconList[meta - aItem.mOffset][0]
+        }
+
+        if (aItem is CompatItemsPagination) {
+            val tIcon: IIcon? = if (aItem.mIconList[meta].size > 1) {
+                aItem.mIconList[meta][0]
             } else {
-                aItem.mIconList[meta - aItem.mOffset][0]
+                aItem.mIconList[meta][0]
             }
             bindTexture(type, tIcon ?: Textures.ItemIcons.RENDERING_ERROR.icon)
         }

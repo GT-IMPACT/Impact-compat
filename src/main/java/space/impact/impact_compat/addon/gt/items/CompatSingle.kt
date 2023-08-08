@@ -4,6 +4,8 @@ import net.minecraft.item.ItemStack
 
 enum class CompatSingle : CompatBaseItemContainer {
 
+    PRIMITIVE_PIPE,
+
 
     ;
 

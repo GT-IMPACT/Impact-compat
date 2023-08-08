@@ -12,12 +12,12 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.biome.BiomeGenBase
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.util.world.GTWorldUtil
-import space.impact.impact_compat.common.init.tileentities.WaterWhealTE
-import space.impact.impact_compat.common.init.tileentities.WindWhealTE
 import space.impact.impact_compat.common.network.Network
-import space.impact.impact_compat.common.tiles.BaseTileRotationEntityModel
+import space.impact.impact_compat.common.tiles.base.BaseTileRotationEntityModel
+import space.impact.impact_compat.common.tiles.models.WaterRotorModelTile
+import space.impact.impact_compat.common.tiles.models.WindRotorModelTile
+import space.impact.impact_compat.common.util.merch.Tags
 import space.impact.impact_compat.core.NBT
-import space.impact.impact_compat.core.Strings
 import space.impact.impact_compat.core.WorldAround
 import space.impact.impact_compat.core.WorldTick
 import space.impact.packet_network.network.NetworkHandler.sendToAllAround
@@ -25,7 +25,7 @@ import space.impact.packet_network.network.NetworkHandler.sendToAllAround
 class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
 
     companion object {
-        private const val LOCAL_NAME = "compact.hatch.primitive_mill_rotor"
+        private const val LOCAL_NAME = "compat.hatch.primitive_mill_rotor"
         private const val TARGET_MAX_AIR_BLOCKS = 64 //TODO
         private const val TARGET_MAX_WATER_BLOCKS = 64 //TODO
     }
@@ -37,7 +37,7 @@ class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
     private var blocksCountToStart: Int = 0
 
     constructor(aID: Int, aName: String)
-            : super(aID, LOCAL_NAME, aName, 0, 0, arrayOf(Strings.E))
+            : super(aID, LOCAL_NAME, aName, 0, 0, arrayOf(Tags.IMPACT_GREGTECH))
 
     constructor(aName: String, aTier: Int, aDescription: Array<String>, aTextures: Array<Array<Array<ITexture?>?>?>?)
             : super(aName, aTier, 0, aDescription, aTextures)
@@ -85,8 +85,8 @@ class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
         val biome = te.world.getBiomeGenForCoordsBody(te.xCoord, te.zCoord)
         var count = 0
         val block = when (wheal) {
-            is WaterWhealTE -> if (biome != BiomeGenBase.river) return 0 else Blocks.water
-            is WindWhealTE -> Blocks.air
+            is WaterRotorModelTile -> if (biome != BiomeGenBase.river) return 0 else Blocks.water
+            is WindRotorModelTile -> Blocks.air
             else -> return 0
         }
         for (xx in -8..8) {
@@ -117,7 +117,7 @@ class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
 
     private fun checkAround(te: IGregTechTileEntity, wheal: BaseTileRotationEntityModel) {
         when (wheal) {
-            is WaterWhealTE -> {
+            is WaterRotorModelTile -> {
                 var isActive = true
                 for (xx in -4..4) {
                     val vec = GTWorldUtil.vectorOffset(te, xx, -1, -1)
@@ -127,7 +127,7 @@ class PrimitiveWhealRotor : GT_MetaTileEntity_Hatch {
                 active = isActive && blocksCountToStart >= TARGET_MAX_WATER_BLOCKS
             }
 
-            is WindWhealTE -> {
+            is WindRotorModelTile -> {
                 var isActive = true
                 for (xx in -4..4) {
                     for (yy in -4..4) {

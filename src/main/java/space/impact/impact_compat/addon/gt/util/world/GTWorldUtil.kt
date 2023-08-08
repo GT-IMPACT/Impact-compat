@@ -4,6 +4,7 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity
 import net.minecraft.block.Block
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.AxisAlignedBB
 import space.impact.impact_compat.common.util.world.Vec3
 
 @Suppress("unused")
@@ -56,5 +57,19 @@ object GTWorldUtil {
 
     inline fun <reified T : IMetaTileEntity> getMTile(gte: IGregTechTileEntity?, pos: Vec3): T? {
         return gte?.getIGregTechTileEntityOffset(pos.x, pos.y, pos.z)?.metaTileEntity as? T
+    }
+
+    fun createAABBOffset(gte: IGregTechTileEntity, offset: Vec3, xzRange: Int, yRange: Int): AxisAlignedBB {
+        val vec = vectorOffset(gte, offset).let {
+            Vec3(it.x + gte.xCoord, it.y + gte.yCoord, it.z + gte.zCoord)
+        }
+        return createAABB(
+            vec.x - xzRange, vec.y - yRange, vec.z - xzRange,
+            vec.x + xzRange, vec.y + yRange, vec.z + xzRange,
+        )
+    }
+
+    fun createAABB(x1: Int, y1: Int, z1: Int, x2: Int, y2: Int, z2: Int): AxisAlignedBB {
+        return AxisAlignedBB.getBoundingBox(x1 + .5, y1 + .5, z1 + .5, x2 + .5, y2 + .5, z2 + .5)
     }
 }

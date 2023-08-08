@@ -11,11 +11,9 @@ import software.bernie.geckolib3.GeckoLib
 import space.impact.impact_compat.addon.gt.GTAddon
 import space.impact.impact_compat.addon.waila.Waila
 import space.impact.impact_compat.client.register.initModels
-import space.impact.impact_compat.client.render.MetaGeneratedItemRenderer
 import space.impact.impact_compat.common.init.items.registerItem
-import space.impact.impact_compat.common.init.tileentities.registerTEDefault
-import space.impact.impact_compat.common.init.tileentities.registerTEModels
-import space.impact.impact_compat.common.item.materials.CompatMaterial
+import space.impact.impact_compat.common.init.tileentities.registerTileEntity
+import space.impact.impact_compat.common.item.materials.api.CompatMaterial
 import space.impact.impact_compat.core.InitSide
 
 class InitClient : InitSide {
@@ -63,8 +61,7 @@ class InitCommon : InitSide {
     override fun init(e: FMLInitializationEvent) {
         CompatMaterial.registerMaterials()
         registerItem()
-        registerTEModels()
-        registerTEDefault()
+        registerTileEntity()
         GTAddon.init()
         Waila.init()
     }

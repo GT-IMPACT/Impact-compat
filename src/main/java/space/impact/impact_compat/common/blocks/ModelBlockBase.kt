@@ -22,12 +22,13 @@ import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import software.bernie.geckolib3.item.GeoItemBlock
 import space.impact.impact_compat.MODID
-import space.impact.impact_compat.common.tiles.BaseCompatTileEntity
+import space.impact.impact_compat.common.tiles.base.BaseCompatTileEntity
 
 abstract class ModelBlockBase(
     private val blockName: String,
     material: Material,
-    item: Class<out ItemBlock> = GeoItemBlock::class.java
+    item: Class<out ItemBlock> = GeoItemBlock::class.java,
+    isDefaultSettings: Boolean = true
 ) : Block(material) {
 
     companion object {
@@ -35,10 +36,12 @@ abstract class ModelBlockBase(
     }
 
     init {
+        if (isDefaultSettings) {
+            super.setHarvestLevel(WRENCH, 1)
+            setHardness(5.0f)
+            setResistance(6.0f)
+        }
         setBlockName(blockName)
-        super.setHarvestLevel(WRENCH, 1)
-        setHardness(5.0f)
-        setResistance(6.0f)
         GameRegistry.registerBlock(this, item, blockName)
     }
 

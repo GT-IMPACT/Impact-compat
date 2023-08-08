@@ -4,7 +4,7 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import gregtech.api.enums.Mods;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
-import space.impact.impact_compat.common.tiles.BaseCompatTileEntity;
+import space.impact.impact_compat.common.tiles.base.BaseCompatTileEntity;
 
 public class Waila {
 	

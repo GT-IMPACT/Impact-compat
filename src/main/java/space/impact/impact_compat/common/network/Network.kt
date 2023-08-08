@@ -3,9 +3,9 @@ package space.impact.impact_compat.common.network
 import net.minecraftforge.common.util.ForgeDirection
 import space.impact.impact_compat.addon.gt.features.steam_age.api.IKinetic
 import space.impact.impact_compat.addon.gt.features.steam_age.api.KineticSpeed
-import space.impact.impact_compat.common.tiles.BaseCompatTileEntity
-import space.impact.impact_compat.common.tiles.BaseTileEntityModel
-import space.impact.impact_compat.common.tiles.IBlockActive
+import space.impact.impact_compat.common.tiles.base.BaseCompatTileEntity
+import space.impact.impact_compat.common.tiles.base.BaseTileEntityModel
+import space.impact.impact_compat.common.tiles.base.IBlockActive
 import space.impact.packet_network.network.packets.createPacketStream
 import space.impact.packet_network.network.registerPacket
 

@@ -1,4 +1,4 @@
-package space.impact.impact_compat.addon.gt.features.steam_age.machines.hatch
+package space.impact.impact_compat.addon.gt.features.steam_age.machines.pump.hatch
 
 import gregtech.api.enums.Textures
 import gregtech.api.interfaces.ITexture

@@ -29,14 +29,14 @@ import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.fluids.FluidTankInfo
 import net.minecraftforge.fluids.IFluidHandler
 import space.impact.impact_compat.addon.gt.base.multi.KineticMultiBlockBase
-import space.impact.impact_compat.addon.gt.features.steam_age.machines.hatch.PumpUnderwaterHatch
+import space.impact.impact_compat.addon.gt.features.steam_age.machines.pump.hatch.PumpUnderwaterHatch
 import space.impact.impact_compat.addon.gt.items.CompatBlocks
 import space.impact.impact_compat.addon.gt.util.textures.CompatTextures
 import space.impact.impact_compat.addon.gt.util.textures.HatchTexture
 import space.impact.impact_compat.addon.gt.util.textures.factory
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addOutputHatchCount
 import space.impact.impact_compat.addon.gt.util.tooltip.TooltipExt.addRotorHatch
-import space.impact.impact_compat.addon.gt.util.world.CompatHatchElement
+import space.impact.impact_compat.addon.gt.util.world.KineticHatchElement
 import space.impact.impact_compat.addon.gt.util.world.CompatStructureUtility.ofFluidPipe
 import space.impact.impact_compat.addon.gt.util.world.checkCountHatches
 import space.impact.impact_compat.common.util.merch.Tags
@@ -78,7 +78,7 @@ class MultiSteamKineticWaterPump : KineticMultiBlockBase<MultiSteamKineticWaterP
             .addElement('B', lazy { _ -> ofFluidPipe(Materials.Bronze, 4) })
             .addElement('C', lazy { _ ->
                 buildHatchAdder(MultiSteamKineticWaterPump::class.java)
-                    .atLeast(CompatHatchElement.RotorHatch)
+                    .atLeast(KineticHatchElement.RotorHatch)
                     .casingIndex(HatchTexture.MACHINE_CAGE_BRONZE.index)
                     .dot(2)
                     .buildAndChain(CompatBlocks.BRONZE_MACHINE_CASING.block, CompatBlocks.BRONZE_MACHINE_CASING.meta)

@@ -1,11 +1,12 @@
 package space.impact.impact_compat.common.item.materials
 
 import net.minecraft.item.ItemStack
-import space.impact.impact_compat.common.item.materials.CompatMaterial.Companion.MAX_MATERIALS
+import space.impact.impact_compat.common.item.materials.api.CompatMaterial.Companion.MAX_MATERIALS
+import space.impact.impact_compat.common.item.materials.api.OreDictionary
 import space.impact.impact_compat.common.item.meta.MetaGeneratedItem32
 
 class MaterialGeneratedItemsPage1 : MetaGeneratedItem32(
-    "compat.meta.01", OreDictionary.ingot, OreDictionary.plate
+    "compat.meta.01", OreDictionary.ingot, OreDictionary.plate, OreDictionary.crushed
 ) {
 
     companion object {

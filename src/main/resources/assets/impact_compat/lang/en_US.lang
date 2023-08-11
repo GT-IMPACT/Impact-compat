@@ -4,6 +4,7 @@ steam.rotor.high=High
 steam.rotor.stop=Not Working
 steam.rotor.speed=Speed
 
+tile.smelter_content.name=Smelter Hot Heap
 tile.steam_rotor.name=Bronze Steam Kinetic Turbine
 impact.tt.steam.rotor.0=Low speed need Steam %s L/s
 impact.tt.steam.rotor.1=Medium speed need Steam %s L/s
@@ -12,7 +13,13 @@ impact.tt.steam.rotor.2=High speed need Steam %s L/s
 tile.compat.steam_age.block.0.name=Bronze Machine Casing
 tile.compat.steam_age.block.1.name=Bronze Firebox Casing
 tile.compat.steam_age.block.2.name=Bronze Brick Casing
+tile.compat.steam_age.block.3.name=Smelter Brick Casing
 
 tile.compat.steam_age.glass.0.name=Bronze Glass
+
+tile.worldgen.01.0.name=Coal
+tile.worldgen.01.1.name=Malachite
+tile.worldgen.01.2.name=Cassiterite
+tile.worldgen.01.3.name=Hematite
 
 waila.underwater_hatch_problem=Detect Problem: Underwater Part

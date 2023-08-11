@@ -1,4 +1,4 @@
-package space.impact.impact_compat.common.blocks
+package space.impact.impact_compat.common.blocks.model
 
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 import software.bernie.geckolib3.item.GeoItemBlock
+import space.impact.impact_compat.common.blocks.base.ModelBlockBase
 import space.impact.impact_compat.common.tiles.models.SteamRotorModelTile
 import space.impact.impact_compat.common.util.translate.Translate.translate
 

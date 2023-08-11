@@ -12,7 +12,6 @@ import space.impact.impact_compat.common.item.materials.api.CompatMaterial
 import space.impact.impact_compat.common.item.materials.api.OreDictionary
 import space.impact.impact_compat.common.item.materials.api.SubTags
 
-
 private const val COUNT_ORE = 1
 private const val COUNT_MOLTEN = 144
 private const val ZERO_EU = 0
@@ -37,7 +36,7 @@ fun addSteamAgePrimitiveSmelterRecipes() {
 
                 if (isSmelter && ore != null) addSmelterMaterialRecipe(
                     inputs = arrayOf(mat to 1),
-                    outPut = mat to 144,
+                    outPut = mat to COUNT_MOLTEN,
                 )
 
                 if (isCaster) for (mold in MoldRecipe.values()) {
@@ -58,7 +57,7 @@ fun addSteamAgePrimitiveSmelterRecipes() {
 
     addSmelterMaterialRecipe(
         inputs = arrayOf(GeneratedMaterials.COPPER to 3, GeneratedMaterials.TIN to 1),
-        outPut = GeneratedMaterials.BRONZE to 576,
+        outPut = GeneratedMaterials.BRONZE to COUNT_MOLTEN * 4,
     )
 }
 

@@ -4,6 +4,7 @@ steam.rotor.high=Высокая
 steam.rotor.stop=Не работает
 steam.rotor.speed=Скорость
 
+tile.smelter_content.name=Горячая Куча Плавильни
 tile.steam_rotor.name=Бронзовая Паровая Кинетическая Турбина
 impact.tt.steam.rotor.0=Для Низкой скорости нужно: %s л/с Пара
 impact.tt.steam.rotor.1=Для Средней скорости нужно: %s л/с Пара
@@ -12,7 +13,13 @@ impact.tt.steam.rotor.2=Для Высокой скорости нужно: %s л
 tile.compat.steam_age.block.0.name=Бронзовый Корпус Машины
 tile.compat.steam_age.block.1.name=Бронзовый Корпус Топки
 tile.compat.steam_age.block.2.name=Бронзово-кирпичный Корпус
+tile.compat.steam_age.block.3.name=Кирпичный Корпус Плавильни
 
 tile.compat.steam_age.glass.0.name=Бронзовое Стекло
+
+tile.worldgen.01.0.name=Уголь
+tile.worldgen.01.1.name=Малахит
+tile.worldgen.01.2.name=Касситерит
+tile.worldgen.01.3.name=Гематит
 
 waila.underwater_hatch_problem=Обнаружена ошибка: Подводный компонент

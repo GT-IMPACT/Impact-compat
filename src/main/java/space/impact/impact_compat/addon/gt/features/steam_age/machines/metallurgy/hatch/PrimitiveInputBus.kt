@@ -94,11 +94,11 @@ class PrimitiveInputBus : GT_MetaTileEntity_Hatch, IAddUIWidgets {
     }
 
     override fun allowPullStack(te: IGregTechTileEntity?, aIndex: Int, side: ForgeDirection, aStack: ItemStack?): Boolean {
-        return side == baseMetaTileEntity.frontFacing
+        return false
     }
 
     override fun allowPutStack(te: IGregTechTileEntity?, aIndex: Int, side: ForgeDirection, aStack: ItemStack?): Boolean {
-        return (side == baseMetaTileEntity.frontFacing && aIndex != circuitSlot && (mRecipeMap == null || mRecipeMap?.containsInput(aStack) == true))
+        return false
     }
 
     override fun useModularUI(): Boolean {

@@ -1,6 +1,6 @@
 @file:Suppress("LeakingThis")
 
-package space.impact.impact_compat.common.blocks
+package space.impact.impact_compat.common.blocks.base
 
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side

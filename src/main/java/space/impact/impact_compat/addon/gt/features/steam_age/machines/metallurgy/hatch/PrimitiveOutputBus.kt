@@ -108,23 +108,11 @@ class PrimitiveOutputBus : GT_MetaTileEntity_Hatch, IAddUIWidgets {
     }
 
     override fun allowPullStack(te: IGregTechTileEntity, aIndex: Int, side: ForgeDirection, aStack: ItemStack?): Boolean {
-        return side == te.frontFacing
+        return false
     }
 
     override fun allowPutStack(te: IGregTechTileEntity?, aIndex: Int, side: ForgeDirection?, aStack: ItemStack?): Boolean {
         return false
-    }
-
-    override fun onPostTick(te: IGregTechTileEntity, aTick: Long) {
-        super.onPostTick(te, aTick)
-        if (te.isServerSide && te.isAllowedToWork && aTick and 0x7L == 0L) {
-            val tTileEntity = te.getIInventoryAtSide(te.frontFacing)
-            if (tTileEntity != null) {
-                GT_Utility.moveMultipleItemStacks(te, tTileEntity, te.frontFacing, te.backFacing,
-                    null, false, 64.toByte(), 1.toByte(), 64.toByte(), 1.toByte(), mInventory.size)
-                for (i in mInventory.indices) if (mInventory[i] != null && mInventory[i].stackSize <= 0) mInventory[i] = null
-            }
-        }
     }
 
     override fun useModularUI(): Boolean {

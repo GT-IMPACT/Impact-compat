@@ -3,8 +3,15 @@ package space.impact.impact_compat.addon.gt.items
 import net.minecraft.item.ItemStack
 import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeBlocks
 import space.impact.impact_compat.addon.gt.features.steam_age.blocks.SteamAgeGlassBlocks
+import space.impact.impact_compat.common.blocks.rock.WorldGenerationBlock
 
 enum class CompatBlocks(val meta: Int = 0) : CompatBaseItemContainer {
+
+    //Block WorldGeneration
+    WORLD_COAL(WorldGenerationBlock.WORLD_COAL_META),
+    WORLD_MALACHITE(WorldGenerationBlock.WORLD_MALACHITE_META),
+    WORLD_CASSITERITE(WorldGenerationBlock.WORLD_CASSITERITE_META),
+    WORLD_HEMATITE(WorldGenerationBlock.WORLD_HEMATITE_META),
 
     //Block Models
     WATER_WHEAL_BLOCK,

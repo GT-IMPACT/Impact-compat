@@ -9,11 +9,13 @@ import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import software.bernie.geckolib3.GeckoLib
 import space.impact.impact_compat.addon.gt.GTAddon
+import space.impact.impact_compat.addon.rwg.RwgAddon
 import space.impact.impact_compat.addon.waila.Waila
 import space.impact.impact_compat.client.register.initModels
 import space.impact.impact_compat.common.init.items.registerItem
 import space.impact.impact_compat.common.init.tileentities.registerTileEntity
 import space.impact.impact_compat.common.item.materials.api.CompatMaterial
+import space.impact.impact_compat.common.worldgen.WorldGenInit
 import space.impact.impact_compat.core.InitSide
 
 class InitClient : InitSide {
@@ -63,10 +65,12 @@ class InitCommon : InitSide {
         registerItem()
         registerTileEntity()
         GTAddon.init()
+        RwgAddon.init()
         Waila.init()
     }
 
     override fun postInit(e: FMLPostInitializationEvent) {
         GTAddon.postInit()
+        WorldGenInit.init()
     }
 }

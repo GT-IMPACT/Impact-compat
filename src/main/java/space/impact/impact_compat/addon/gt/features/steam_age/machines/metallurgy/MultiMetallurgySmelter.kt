@@ -38,7 +38,7 @@ import space.impact.impact_compat.addon.gt.util.world.GTParticles
 import space.impact.impact_compat.addon.gt.util.world.GTWorldUtil
 import space.impact.impact_compat.addon.gt.util.world.PrimitiveHatchElement
 import space.impact.impact_compat.addon.gt.util.world.checkCountHatches
-import space.impact.impact_compat.common.blocks.SmelterContentBlock
+import space.impact.impact_compat.common.blocks.model.SmelterContentBlock
 import space.impact.impact_compat.common.tiles.models.SmelterContentModelTile
 import space.impact.impact_compat.common.util.merch.Tags
 import space.impact.impact_compat.common.util.sound.SoundRes

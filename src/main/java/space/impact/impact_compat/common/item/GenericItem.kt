@@ -1,3 +1,5 @@
+@file:Suppress("LeakingThis")
+
 package space.impact.impact_compat.common.item
 
 import cpw.mods.fml.common.registry.GameRegistry

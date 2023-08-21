@@ -1,0 +1,8 @@
+dependencies {
+    api("com.github.GTNewHorizons:Forgelin:1.9.2-GTNH-1.7.10-Edition")
+    api("com.github.GTNewHorizons:ModularUI:1.1.10:dev")
+    api("space.impact:packet_network:1.1.+:dev") { transitive = false }
+    api("space.impact:GT5-Unofficial:5.09.44.5:dev")
+    api("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev")
+    implementation(fileTree(dir: 'libs', include: '*.jar'))
+}

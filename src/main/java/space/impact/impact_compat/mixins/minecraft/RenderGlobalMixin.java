@@ -84,12 +84,14 @@ public abstract class RenderGlobalMixin {
 		if (this.cloudTickCounter % 20 == 0) {
 			Iterator<DestroyBlockProgress[]> iterator = impact_compat$progressBlocks.values().iterator();
 			while (iterator.hasNext()) {
-				for (DestroyBlockProgress block : iterator.next()) {
-					int i = block.getCreationCloudUpdateTick();
-					if (this.cloudTickCounter - i > 400) {
-						iterator.remove();
+				try {
+					for (DestroyBlockProgress block : iterator.next()) {
+						int i = block.getCreationCloudUpdateTick();
+						if (this.cloudTickCounter - i > 400) {
+							iterator.remove();
+						}
 					}
-				}
+				} catch (Exception ignore) {}
 			}
 		}
 		ci.cancel();

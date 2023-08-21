@@ -1,5 +1,6 @@
 package space.impact.impact_compat.common.item.tool
 
+import cpw.mods.fml.common.eventhandler.Event
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import net.minecraft.block.Block
 import net.minecraft.entity.Entity
@@ -14,6 +15,7 @@ import net.minecraft.world.World
 import net.minecraftforge.common.ForgeHooks
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.ForgeDirection
+import net.minecraftforge.event.entity.player.PlayerEvent
 import space.impact.impact_compat.events.RenderDestroyBlockProgressEvent
 import space.impact.impact_compat.events.RenderSelectionBoxEvent
 
@@ -57,6 +59,16 @@ class ToolForgeHammer : ToolBaseItem("tool.forge_hammer", "Forge Hammer", "Hulk 
                 coords = e::addBlock,
             )
         } else e.isCanceled = true
+    }
+
+    @SubscribeEvent
+    fun onBreakBlockEvent(e: PlayerEvent.HarvestCheck) {
+        if (e.entityPlayer?.currentEquippedItem?.item is ToolForgeHammer) {
+            val tool = e.block.getHarvestTool(0)
+            if (tool == null || tool == "pickaxe") {
+                e.success = true
+            }
+        }
     }
 
     override fun getDigSpeed(itemstack: ItemStack?, block: Block?, metadata: Int): Float {

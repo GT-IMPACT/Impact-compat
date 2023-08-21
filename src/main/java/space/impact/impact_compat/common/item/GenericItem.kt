@@ -16,7 +16,7 @@ import net.minecraft.world.World
 import space.impact.impact_compat.MODID
 import java.lang.String.format
 
-open class GenericItem @JvmOverloads constructor(unLocalName: String, englishName: String?, englishTooltip: String?, needTooltipToLang: Boolean = true) : Item() {
+open class GenericItem @JvmOverloads constructor(unLocalName: String, englishName: String?, englishTooltip: String?, needTooltipToLang: Boolean = true) : Item(), IElectricItem {
 
     protected val name: String
     protected var tooltip: String? = null
@@ -60,8 +60,28 @@ open class GenericItem @JvmOverloads constructor(unLocalName: String, englishNam
         return icon
     }
 
-    fun getTier(stack: ItemStack?): Int {
+    override fun canProvideEnergy(itemStack: ItemStack?): Boolean {
+        return false
+    }
+
+    override fun getChargedItem(itemStack: ItemStack?): Item {
+        return this
+    }
+
+    override fun getEmptyItem(itemStack: ItemStack?): Item {
+        return this
+    }
+
+    override fun getMaxCharge(itemStack: ItemStack?): Double {
+        return 0.0
+    }
+
+    override fun getTier(stack: ItemStack?): Int {
         return 0
+    }
+
+    override fun getTransferLimit(itemStack: ItemStack?): Double {
+        return 0.0
     }
 
     override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltips: MutableList<Any?>, f3: Boolean) {
@@ -69,7 +89,7 @@ open class GenericItem @JvmOverloads constructor(unLocalName: String, englishNam
         if (tooltip != null) {
             tooltips.add(GT_LanguageManager.getTranslation(tooltip))
         }
-        if (isElectricItem(stack, 10000)) {
+        if (isElectricItem(stack)) {
             tooltips.add(format(GT_LanguageManager.getTranslation("Item_DESCRIPTION_Index_019"), getTier(stack).toString() + ""))
         }
         addToolTip(tooltips, stack, player)
@@ -93,11 +113,11 @@ open class GenericItem @JvmOverloads constructor(unLocalName: String, englishNam
         return getContainerItem(stack) != null
     }
 
-    companion object {
-        fun isElectricItem(stack: ItemStack?, tier: Int = 10000): Boolean {
-            return stack != null && stack.item is IElectricItem && (stack.item as IElectricItem).getTier(stack) <= tier
-        }
+    private fun isElectricItem(stack: ItemStack?, tier: Int = 10000): Boolean {
+        return getTier(stack) <= tier
+    }
 
+    companion object {
         fun transItem(key: String, english: String?): String {
             return GT_LanguageManager.addStringLocalization("Item_DESCRIPTION_Index_$key", english, false)
         }
